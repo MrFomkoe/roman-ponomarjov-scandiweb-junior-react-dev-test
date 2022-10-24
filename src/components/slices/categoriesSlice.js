@@ -25,6 +25,13 @@ export const categoriesSlice = createSlice({
     isLoading: true,
     hasError: false,
     categories: null,
+    currentCategory: null,
+    defaultCategory: null,
+  },
+  reducers: {
+    switchCategory: (state, action) => {
+      state.currentCategory = action.payload;
+    },
   },
 
   extraReducers: {
@@ -34,6 +41,7 @@ export const categoriesSlice = createSlice({
     [loadCategories.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.categories = action.payload.categories;
+      state.defaultCategory =  action.payload.categories[0].name;
     },
     [loadCategories.rejected]: (state) => {
       state.isLoading = false;
@@ -41,5 +49,7 @@ export const categoriesSlice = createSlice({
     },
   },
 });
+
+export const { switchCategory } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

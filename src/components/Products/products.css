@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+
+.page-container {
+  width: 100%;
+  position: relative;
+}
+
+h2 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 42px;
+}
+
+.all-products-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  row-gap: 6.5rem;
+}

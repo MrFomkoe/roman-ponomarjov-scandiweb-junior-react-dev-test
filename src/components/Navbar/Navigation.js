@@ -1,13 +1,11 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink, Link, useParams } from "react-router-dom";
-import { loadCategories } from "../slices/categoriesSlice";
-import { switchCategory } from "../slices/productsSlice";
-
-
+import { NavLink, useParams } from "react-router-dom";
+import { loadCategories, switchCategory } from "../slices/categoriesSlice";
+import "./navbar.css";
 
 function withParams(Component) {
-  return (props) => <Component {...props} params={useParams()} />
+  return (props) => <Component {...props} params={useParams()} />;
 }
 
 class Navigation extends Component {
@@ -17,54 +15,59 @@ class Navigation extends Component {
   }
 
   componentDidMount() {
-    this.props.loadCategories();
+    const { loadCategories, categories } = this.props;
+    if (!categories.categories) {
+      loadCategories();
+    }
   }
 
   handleClick(categoryName) {
-    this.props.switchCategory(categoryName);
+    const { switchCategory } = this.props;
+    switchCategory(categoryName);
   }
 
   render() {
-    const categories = this.props.categories.categories;
-    const isLoading = this.props.categories.isLoading;
+    const { categories, defaultCategory, isLoading} = this.props.categories;
     return (
-      <div>
-        {
-          isLoading ?
-
-          <p> Loading...</p> :
-
-          <ul>
-            {categories.map(category => {
+      <nav className="navigation">
+        {isLoading ? (
+          ""
+        ) : (
+          <ul className="navigation-list">
+            {categories.map((category) => {
               return (
-                <li key={category.name} onClick={() => this.handleClick(category.name)}>
-                  <NavLink 
-                    to={(category.name === 'all') ? "/" : `/${category.name}`}
+                <li
+                  key={category.name}
+                  onClick={() => this.handleClick(category.name)}
+                >
+                  <NavLink
                     
-                    >
+                    className={({isActive}) => (isActive ? "nav-link nav-link-active" : 'nav-link')}
+                    to={
+                      category.name !== defaultCategory ? `/${category.name}` : `/`
+                    } end
+                  >
                     {category.name}
+
                   </NavLink>
                 </li>
-              )
+              );
             })}
-
           </ul>
-        }
-
-      </div>
-    )
+        )}
+      </nav>
+    );
   }
 }
 
-
-const mapStateToProps = state => ({ 
+const mapStateToProps = (state) => ({
   categories: state.categories,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadCategories: () => dispatch(loadCategories()),
   switchCategory: (categoryName) => dispatch(switchCategory(categoryName)),
-})
+});
 
 export default withParams(
   connect(mapStateToProps, mapDispatchToProps)(Navigation)
