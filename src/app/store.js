@@ -10,10 +10,11 @@ import {
   REGISTER,
 } from "redux-persist";
 import storageSession from 'redux-persist/lib/storage/session'
-
+import cartReducer from "../components/slices/cartSlice";
 import categoriesReducer from "../components/slices/categoriesSlice";
 import currenciesReducer from "../components/slices/currencySlice";
 import productsReducer from "../components/slices/productsSlice";
+
 
 
 const persistConfig = {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   products: productsReducer,
   currencies: currenciesReducer,
+  cart: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

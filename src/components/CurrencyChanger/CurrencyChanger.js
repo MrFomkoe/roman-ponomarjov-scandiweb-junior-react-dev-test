@@ -61,8 +61,15 @@ class CurrencyChanger extends Component {
   }
 
   render() {
+    const { isLoading } = this.props.currencies;
+
+
     const { currencies, currentCurrency } = this.props.currencies;
     const { collapseCurrencyChanger } = this.state;
+
+    {if (!currentCurrency) {
+      return
+    }}
 
     return (
       <div className="currency-container" ref={this.wrapperRef}>
