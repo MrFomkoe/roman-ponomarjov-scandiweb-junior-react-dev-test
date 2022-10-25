@@ -15,9 +15,7 @@ class SingleProduct extends Component {
 
     this.state = {
       detailedView: true,
-      newProduct: {
-        // attributes: {},
-      },
+      newProductAttributes: {},
     };
   }
 
@@ -30,7 +28,6 @@ class SingleProduct extends Component {
   handleMouseLeave() {
     this.setState({
       detailedView: true,
-      // newProduct: {},
     });
   }
 
@@ -38,41 +35,38 @@ class SingleProduct extends Component {
     event.preventDefault();
     event.target.reset();
     const { brand, id, name, prices } = this.props.product;
-    const attributesArray = this.state.newProduct.attributes;
-    console.log(attributesArray)
+    const attributesArray = Object.values(this.state.newProductAttributes);
+    
     attributesArray.unshift(id);
+    
     const productUniqueId = attributesArray.join("-").toLowerCase();
-    this.setState(
-      (prevState) => ({
-        newProduct: {
-          ...prevState.newProduct,
-          name: name,
-          brand: brand,
-          id: productUniqueId,
-        },
-      }),
-      () => {
-        this.props.addItemToCart(this.state.newProduct);
-        this.setState((prevState) => ({
-          ...prevState,
-          newProduct: null,
-        }));
-      }
-    );
+    this.props.addItemToCart({
+      id: productUniqueId,
+      name: name,
+      brand: brand,
+      attributes: this.state.newProductAttributes,
+    });
+
+    this.setState((prevState) => ({
+      ...prevState,
+      newProductAttributes: {}
+    }))
+
+
   }
 
   handleAttributesChange(inId, event) {
     const id = inId.toLowerCase();
-    console.log(event.target.value);
-    this.setState((prevState) => ({
-      newProduct: {
-        ...prevState.newProduct,
-        attributes: {
-          ...prevState.newProduct.attributes,
+
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        newProductAttributes: {
+          ...prevState.newProductAttributes,
           [id]: event.target.value,
-        },
-      },
-    }));
+        }
+      }
+    })
   }
 
   render() {

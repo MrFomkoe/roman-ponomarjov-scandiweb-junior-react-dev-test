@@ -3,35 +3,37 @@ import { createSlice, current } from "@reduxjs/toolkit";
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    cartItems: [
-      {
-        size: "Small",
-        name: "Jacket",
-        brand: "Canada Goose",
-        id: "jacket-canada-goosee-small",
-        quantity: 1,
-      },
-    ],
+    cartItems: [],
+    totalSum: null,
+    numOfProducts: null,
   },
   reducers: {
     addItemToCart: (state, action) => {
-      const { size, name, brand, id } = action.payload;
-      let newItem;
-      // Check if the item with same attributes is already in cart
-      state.cartItems.find((cartItem) => {
-        if (cartItem.id === id) {
-          cartItem.quantity = cartItem.quantity + 1;
-        } else {
-          newItem = {
-            id: id,
-            name: name,
-            brand: brand,
-            quantity: 1,
-          };
-        }
-      });
+      const { cartItems } = state;
+      const { attributes, name, brand, id } = action.payload;
 
-      // console.log(action.payload);
+      let newItem = {
+        id: id,
+        name: name,
+        brand: brand,
+        attributes: attributes,
+        quantity: 1,
+      };
+
+      // Check if the item added to cart is already present
+      const itemInCartAlready = cartItems.findIndex((item) => item.id === id);
+
+      // If not - add item to cart. Else - increse quantity
+      if (itemInCartAlready === -1) {
+        cartItems.push(newItem);
+      } else {
+        const presentItem = cartItems.find((item) => item.id === id);
+        presentItem.quantity += 1;
+      }
+
+      // Calculate total amount of product instances
+      state.numOfProducts = cartItems.length;
+
     },
     removeItemFromCart: (state, action) => {},
   },

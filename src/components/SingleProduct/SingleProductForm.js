@@ -23,7 +23,7 @@ export class SingleProductForm extends Component {
                   type="radio"
                   name={id}
                   value={item.displayValue}
-                  onChange={(e) => this.props.handleAttributesChange(id, e)}
+                  onClick={(e) => this.props.handleAttributesChange(id, e)}
                   required
                 />
                 {this.renderItemAttributeType(item, type)}
