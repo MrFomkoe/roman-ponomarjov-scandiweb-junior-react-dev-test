@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { loadCategories, switchCategory } from "../slices/categoriesSlice";
 import "./navbar.css";
-
-function withParams(Component) {
-  return (props) => <Component {...props} params={useParams()} />;
-}
 
 class Navigation extends Component {
   constructor(props) {
@@ -27,7 +23,7 @@ class Navigation extends Component {
   }
 
   render() {
-    const { categories, defaultCategory, isLoading} = this.props.categories;
+    const { categories, defaultCategory, isLoading } = this.props.categories;
     return (
       <nav className="navigation">
         {isLoading ? (
@@ -41,14 +37,17 @@ class Navigation extends Component {
                   onClick={() => this.handleClick(category.name)}
                 >
                   <NavLink
-                    
-                    className={({isActive}) => (isActive ? "nav-link nav-link-active" : 'nav-link')}
+                    className={({ isActive }) =>
+                      isActive ? "nav-link nav-link-active" : "nav-link"
+                    }
                     to={
-                      category.name !== defaultCategory ? `/${category.name}` : `/`
-                    } end
+                      category.name !== defaultCategory
+                        ? `/${category.name}`
+                        : `/`
+                    }
+                    end
                   >
                     {category.name}
-
                   </NavLink>
                 </li>
               );
@@ -69,6 +68,4 @@ const mapDispatchToProps = (dispatch) => ({
   switchCategory: (categoryName) => dispatch(switchCategory(categoryName)),
 });
 
-export default withParams(
-  connect(mapStateToProps, mapDispatchToProps)(Navigation)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

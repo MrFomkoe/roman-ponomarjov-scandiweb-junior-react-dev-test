@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../slices/cartSlice";
 import "./singleProduct.css";
 import { SingleProductForm } from "./SingleProductForm";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { cartIconBig } from "../../app/icons";
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -11,10 +12,14 @@ class SingleProduct extends Component {
 
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleSimplifiedSubmit = this.handleSimplifiedSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAttributesChange = this.handleAttributesChange.bind(this);
 
     this.state = {
+      // Change this parameter to "true" to enable simplified selection
+      simplifiedSelection: false,
+
       detailedView: false,
       newProductAttributes: {},
     };
@@ -35,19 +40,32 @@ class SingleProduct extends Component {
     }));
   }
 
+  handleSimplifiedSubmit() {
+    const { attributes, brand, id, name } = this.props.product;
+    
+    if (attributes.length === 0) {
+      this.props.addItemToCart({
+        initialId: id,
+        id: id,
+        name: name,
+        brand: brand,
+        attributes: this.state.newProductAttributes,
+      });
+    }
+  }
+
   handleSubmit(event) {
-    const { newProductAttributes } = this.state;
-
-    if (!newProductAttributes) return;
-
     event.preventDefault();
     event.target.reset();
+
+    const { newProductAttributes } = this.state;
     const { brand, id, name, prices } = this.props.product;
+
+    // Creates unique id for selected product
     const attributesArray = Object.values(newProductAttributes);
-
     attributesArray.unshift(id);
-
     const productUniqueId = attributesArray.join("-").toLowerCase();
+
     this.props.addItemToCart({
       initialId: id,
       id: productUniqueId,
@@ -82,7 +100,7 @@ class SingleProduct extends Component {
     const { isLoading } = this.props;
     const { currentCurrency } = this.props;
     const backgroundImage = gallery[0];
-    const detailedView = this.state.detailedView;
+    const { detailedView, simplifiedSelection } = this.state;
 
     const priceToShow = prices.find(
       (price) => price.currency.label === currentCurrency.label
@@ -90,46 +108,55 @@ class SingleProduct extends Component {
     const { amount, currency } = priceToShow;
 
     return (
-        <div
-          className={`product ${!inStock && "not-in-stock"}`}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-        >
-          <Link
-            className="link-to-details"
+      <div
+        className={`product ${!inStock && "not-in-stock"}`}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
+        <Link to={`/products/${id}`} className="link-to-details"></Link>
+
+        {/* Out of stock overlay */}
+        {!inStock && <div className="not-in-stock-overlay">OUT OF STOCK</div>}
+
+        {/* Product's main card */}
+        <div className="product__inner">
+          <div
+            className="product-attributes"
+            style={{ backgroundImage: `url(${backgroundImage})` }}
           >
-          </Link>
+            {/* Product attributes overlay 
+              Can be switched between simplified way of submission and detailed (with attribute selection)
+              */}
+            {detailedView && inStock && (
+              <div>
+                {/* Simplified selection */}
+                {simplifiedSelection ? (
+                  <button onClick={(e) => this.handleSimplifiedSubmit()} className="cart-icon-big">
+                    {cartIconBig()}
+                  </button>
+                ) : (
+                  // Advanced selection with attribute choice
+                  <SingleProductForm
+                    attributes={attributes}
+                    handleSubmit={this.handleSubmit}
+                    handleAttributesChange={this.handleAttributesChange}
+                  />
+                )}
+              </div>
+            )}
+          </div>
 
-          {/* Out of stock overlay */}
-          {!inStock && <div className="not-in-stock-overlay">OUT OF STOCK</div>}
-
-          {/* Product's main card */}
-          <div className="product__inner">
-            <div
-              className="product-attributes"
-              style={{ backgroundImage: `url(${backgroundImage})` }}
-            >
-              {/* Product attributes overlay */}
-              {detailedView && inStock && (
-                <SingleProductForm
-                  attributes={attributes}
-                  handleSubmit={this.handleSubmit}
-                  handleAttributesChange={this.handleAttributesChange}
-                />
-              )}
-            </div>
-
-            <div className="product-description">
-              <span className="product-title">
-                {brand} {name}
-              </span>
-              <br />
-              <span className="product-price">
-                {currency.symbol} {amount.toFixed(2)}
-              </span>
-            </div>
+          <div className="product-description">
+            <span className="product-title">
+              {brand} {name}
+            </span>
+            <br />
+            <span className="product-price">
+              {currency.symbol} {amount.toFixed(2)}
+            </span>
           </div>
         </div>
+      </div>
     );
   }
 }

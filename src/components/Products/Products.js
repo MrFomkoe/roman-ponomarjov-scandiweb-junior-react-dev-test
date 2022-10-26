@@ -11,9 +11,16 @@ function withParams(Component) {
 }
 
 class Products extends Component {
-  componentDidMount() {
-    const { defaultCategory, switchCategory, currentCategory } = this.props;
+  async componentDidMount() {
+    const {
+      defaultCategory,
+      switchCategory,
+      currentCategory,
+      loadCategoryProducts,
+    } = this.props;
+
     if (!currentCategory) {
+      // Action for first run of the website
       switchCategory(defaultCategory);
     } else {
       loadCategoryProducts(currentCategory);
@@ -62,10 +69,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadCategoryProducts: (categoryName) =>
-    dispatch(loadCategoryProducts(categoryName)),
+  loadCategoryProducts: (categoryName) => dispatch(loadCategoryProducts(categoryName)),
   switchCategory: (categoryName) => dispatch(switchCategory(categoryName)),
 });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Products)
 
 export default withParams(
   connect(mapStateToProps, mapDispatchToProps)(Products)

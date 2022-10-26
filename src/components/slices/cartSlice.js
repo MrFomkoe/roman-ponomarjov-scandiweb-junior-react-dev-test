@@ -34,7 +34,6 @@ export const cartSlice = createSlice({
 
       // Calculate total amount of product instances
       state.numOfProducts = cartItems.length;
-
     },
     removeItemFromCart: (state, action) => {},
   },

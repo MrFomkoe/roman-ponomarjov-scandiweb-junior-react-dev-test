@@ -11,10 +11,11 @@ export class SingleProductForm extends Component {
 
   renderAttribute(attribute) {
     const { id, items, name, type } = attribute;
+    const { detailedView } = this.props;
 
     return (
       <fieldset key={id} id={id} className="product-form__section">
-        <h3>{name}:</h3>
+        <h3>{name.toUpperCase()}:</h3>
         {items.map((item) => {
           return (
             <label key={item.id}>
@@ -27,7 +28,6 @@ export class SingleProductForm extends Component {
                   required
                 />
                 {this.renderItemAttributeType(item, type)}
-                
               </div>
             </label>
           );
@@ -38,23 +38,29 @@ export class SingleProductForm extends Component {
 
   renderItemAttributeType(item, type) {
     if (type === "swatch") {
-      return <span className="displayColor" style={{background: `${item.value}`}}></span>
+      return (
+        <span
+          className="displayColor"
+          style={{ background: `${item.value}` }}
+        ></span>
+      );
     } else {
       return <span className="displayText">{item.value}</span>;
     }
   }
 
-
   render() {
-    const attributes = this.props.attributes;
+    const { attributes, detailedView } = this.props;
 
     return (
-      <form className="product-form" onSubmit={this.props.handleSubmit}>
+      <form id="attributes-form" className={`product-form ${detailedView && 'detailed-view'} `} onSubmit={this.props.handleSubmit}>
         {attributes.map((attribute) => this.renderAttribute(attribute))}
 
-        <button type="submit" className="cart-icon-big">
-          {cartIconBig()}
-        </button>
+        {!detailedView && (
+          <button type="submit" className="cart-icon-big-btn">
+            {cartIconBig()}
+          </button>
+        )}
       </form>
     );
   }
