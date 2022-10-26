@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../slices/cartSlice";
 import "./singleProduct.css";
 import { SingleProductForm } from "./SingleProductForm";
+import { Link, useParams } from "react-router-dom";
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -14,33 +15,41 @@ class SingleProduct extends Component {
     this.handleAttributesChange = this.handleAttributesChange.bind(this);
 
     this.state = {
-      detailedView: true,
+      detailedView: false,
       newProductAttributes: {},
     };
   }
 
   handleMouseEnter() {
-    this.setState({
+    this.setState((prevState) => ({
+      ...prevState,
       detailedView: true,
-    });
+    }));
   }
 
   handleMouseLeave() {
-    this.setState({
-      detailedView: true,
-    });
+    this.setState((prevState) => ({
+      ...prevState,
+      detailedView: false,
+      newProductAttributes: {},
+    }));
   }
 
   handleSubmit(event) {
+    const { newProductAttributes } = this.state;
+
+    if (!newProductAttributes) return;
+
     event.preventDefault();
     event.target.reset();
     const { brand, id, name, prices } = this.props.product;
-    const attributesArray = Object.values(this.state.newProductAttributes);
-    
+    const attributesArray = Object.values(newProductAttributes);
+
     attributesArray.unshift(id);
-    
+
     const productUniqueId = attributesArray.join("-").toLowerCase();
     this.props.addItemToCart({
+      initialId: id,
       id: productUniqueId,
       name: name,
       brand: brand,
@@ -49,10 +58,8 @@ class SingleProduct extends Component {
 
     this.setState((prevState) => ({
       ...prevState,
-      newProductAttributes: {}
-    }))
-
-
+      newProductAttributes: {},
+    }));
   }
 
   handleAttributesChange(inId, event) {
@@ -64,9 +71,9 @@ class SingleProduct extends Component {
         newProductAttributes: {
           ...prevState.newProductAttributes,
           [id]: event.target.value,
-        }
-      }
-    })
+        },
+      };
+    });
   }
 
   render() {
@@ -83,41 +90,46 @@ class SingleProduct extends Component {
     const { amount, currency } = priceToShow;
 
     return (
-      <div
-        className={`product ${!inStock && "not-in-stock"}`}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        {/* Out of stock overlay */}
-        {!inStock && <div className="not-in-stock-overlay">OUT OF STOCK</div>}
-
-        {/* Product's main card */}
-        <div className="product__inner">
-          <div
-            className="product-attributes"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+        <div
+          className={`product ${!inStock && "not-in-stock"}`}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+        >
+          <Link
+            className="link-to-details"
           >
-            {/* Product attributes overlay */}
-            {detailedView && inStock && (
-              <SingleProductForm
-                attributes={attributes}
-                handleSubmit={this.handleSubmit}
-                handleAttributesChange={this.handleAttributesChange}
-              />
-            )}
-          </div>
+          </Link>
 
-          <div className="product-description">
-            <span className="product-title">
-              {brand} {name}
-            </span>
-            <br />
-            <span className="product-price">
-              {currency.symbol} {amount.toFixed(2)}
-            </span>
+          {/* Out of stock overlay */}
+          {!inStock && <div className="not-in-stock-overlay">OUT OF STOCK</div>}
+
+          {/* Product's main card */}
+          <div className="product__inner">
+            <div
+              className="product-attributes"
+              style={{ backgroundImage: `url(${backgroundImage})` }}
+            >
+              {/* Product attributes overlay */}
+              {detailedView && inStock && (
+                <SingleProductForm
+                  attributes={attributes}
+                  handleSubmit={this.handleSubmit}
+                  handleAttributesChange={this.handleAttributesChange}
+                />
+              )}
+            </div>
+
+            <div className="product-description">
+              <span className="product-title">
+                {brand} {name}
+              </span>
+              <br />
+              <span className="product-price">
+                {currency.symbol} {amount.toFixed(2)}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 }
