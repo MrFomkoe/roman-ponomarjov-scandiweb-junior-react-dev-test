@@ -4,14 +4,18 @@
   top: 0;
   height: 80px;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, auto));
-  grid-template-rows: 1fr;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   background: #ffffff;
   padding: 0 6.25rem;
 }
+
+.navbar > * {
+  width: 30%;
+}
+
+/* Navigation links */
 
 .navigation {
   display: flex;
@@ -48,4 +52,18 @@
 .nav-link.nav-link-active {
   color: #5ece7b;
   border-bottom: #5ece7b 2px solid;
+}
+
+/* Cart overlay and currency changer section */
+
+.navbar-control-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.navbar-control-section > * {
+  /* border: solid green 2px; */
+  
 }

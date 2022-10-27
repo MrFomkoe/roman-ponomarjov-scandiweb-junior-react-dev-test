@@ -4,7 +4,7 @@
 }
 
 .currency-preview__inner {
-  height: 30px;
+  height: 2rem;
   display: flex;
   align-items: center;
 }
@@ -31,7 +31,6 @@
 
 .currency-selector {
   background: #ffffff;
-  /* z-index: 10; */
   position: absolute;
   width: 115px;
   -webkit-box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
@@ -65,5 +64,5 @@
 }
 
 .currency-selector__label {
-  margin-left: 20px;
+  margin-left: 1rem;
 }

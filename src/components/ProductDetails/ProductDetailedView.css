@@ -114,6 +114,10 @@
   font-weight: 600;
 }
 
+.add-to-cart-btn.out-of-stock-btn {
+  background: rgba(141, 143, 154, 1);
+}
+
 .product-price {
   margin-bottom: 1.25rem;
 }

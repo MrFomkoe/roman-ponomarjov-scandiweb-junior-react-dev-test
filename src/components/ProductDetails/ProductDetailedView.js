@@ -23,7 +23,6 @@ class ProductDetails extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAttributesChange = this.handleAttributesChange.bind(this);
     this.changeImage = this.changeImage.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
@@ -73,19 +72,14 @@ class ProductDetails extends Component {
     }));
   }
 
-  changeImage({target}) {
+  changeImage({ target }) {
     const imageSrc = target.src;
     this.setState((prevState) => {
       return {
         ...prevState,
         activeImage: imageSrc,
-      }
-    })
-  }
-
-  handleScroll(event) {
-    // event.currentTarget.scrollLeft += event.deltaY;
-
+      };
+    });
   }
 
   render() {
@@ -111,23 +105,30 @@ class ProductDetails extends Component {
     );
 
     return (
-      <div >
+      <div>
         {isLoading ? (
           ""
         ) : (
           <div className="detailed-view-container">
             <div className="product-image">
-              <div className="image-slider" onWheel={(e) => this.handleScroll(e)}>
+              <div className="image-slider">
                 {gallery?.map((image, index) => {
                   return (
                     <div key={index} className="image-container">
-                      <img className="image-unit" src={image} onClick={e => this.changeImage(e)} />
+                      <img
+                        className="image-unit"
+                        src={image}
+                        onClick={(e) => this.changeImage(e)}
+                      />
                     </div>
                   );
                 })}
               </div>
               <div className="main-image">
-                <img className="image-unit" src={activeImage ? activeImage : gallery[0]} />
+                <img
+                  className="image-unit"
+                  src={activeImage ? activeImage : gallery[0]}
+                />
               </div>
             </div>
 
@@ -148,13 +149,19 @@ class ProductDetails extends Component {
                 </span>
               </div>
 
-              <button
-                type="submit"
-                form="attributes-form"
-                className="add-to-cart-btn"
-              >
-                ADD TO CART
-              </button>
+              {inStock ? (
+                <button
+                  type="submit"
+                  form="attributes-form"
+                  className="add-to-cart-btn"
+                >
+                  ADD TO CART
+                </button>
+              ) : (
+                <button className="add-to-cart-btn out-of-stock-btn" disabled>
+                  PRODUCT OUT OF STOCK
+                </button>
+              )}
 
               <div className="product-description-text">
                 {parse(description)}
