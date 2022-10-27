@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { SingleProductForm } from "../SingleProduct/SingleProductForm";
+import { SingleProductForm } from "../../app/features/SingleProductForm";
 import { addItemToCart } from "../slices/cartSlice";
 import { loadSingleProduct } from "../slices/productsSlice";
 import "./ProductDetailedView.css";
+import parse from "html-react-parser";
 
 function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
@@ -16,10 +17,13 @@ class ProductDetails extends Component {
 
     this.state = {
       newProductAttributes: {},
+      activeImage: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAttributesChange = this.handleAttributesChange.bind(this);
+    this.changeImage = this.changeImage.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
@@ -43,9 +47,9 @@ class ProductDetails extends Component {
   }
 
   handleSubmit(event) {
-    console.log('click')
+    console.log("click");
     event.preventDefault();
-    event.target.reset(); 
+    event.target.reset();
 
     const { newProductAttributes } = this.state;
     const { brand, id, name, prices } = this.props.productData;
@@ -69,34 +73,61 @@ class ProductDetails extends Component {
     }));
   }
 
-  render() {
-    const { isLoading, addItemToCart } = this.props;
-    
-    {if(isLoading) return}
+  changeImage({target}) {
+    const imageSrc = target.src;
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        activeImage: imageSrc,
+      }
+    })
+  }
 
-    const { id, attributes, brand, gallery, inStock, name, prices } =
-      this.props.productData;
-    
+  handleScroll(event) {
+    // event.currentTarget.scrollLeft += event.deltaY;
+
+  }
+
+  render() {
+    const { isLoading, currentCurrency } = this.props;
+    const { activeImage } = this.state;
+
+    {
+      if (isLoading) return;
+    }
+
+    const {
+      id,
+      attributes,
+      brand,
+      gallery,
+      inStock,
+      name,
+      prices,
+      description,
+    } = this.props.productData;
+    const priceToShow = prices.find(
+      (price) => price.currency.label === currentCurrency.label
+    );
+
     return (
-      <div>
+      <div >
         {isLoading ? (
           ""
         ) : (
-          <div className="container">
+          <div className="detailed-view-container">
             <div className="product-image">
-              <div className="image-slider">
-                {gallery.map((image, index) => {
+              <div className="image-slider" onWheel={(e) => this.handleScroll(e)}>
+                {gallery?.map((image, index) => {
                   return (
                     <div key={index} className="image-container">
-                      <img className="image-single" src={image} />
+                      <img className="image-unit" src={image} onClick={e => this.changeImage(e)} />
                     </div>
                   );
                 })}
               </div>
-              <div className="full-image">
-                <div className="image-container">
-                  <img className="image-single" src={gallery[0]} />
-                </div>
+              <div className="main-image">
+                <img className="image-unit" src={activeImage ? activeImage : gallery[0]} />
               </div>
             </div>
 
@@ -110,7 +141,24 @@ class ProductDetails extends Component {
                 handleAttributesChange={this.handleAttributesChange}
                 detailedView={true}
               />
-              <button type="submit" form="attributes-form" className="add-to-cart-btn"> ADD TO CART </button>
+              <div className="product-price">
+                <h3>PRICE:</h3>
+                <span>
+                  {priceToShow.currency.symbol} {priceToShow.amount}{" "}
+                </span>
+              </div>
+
+              <button
+                type="submit"
+                form="attributes-form"
+                className="add-to-cart-btn"
+              >
+                ADD TO CART
+              </button>
+
+              <div className="product-description-text">
+                {parse(description)}
+              </div>
             </div>
           </div>
         )}
@@ -122,6 +170,7 @@ class ProductDetails extends Component {
 const mapStateToProps = (state) => ({
   productData: state.products.singleProduct,
   isLoading: state.products.singleProductLoading,
+  currentCurrency: state.currencies.currentCurrency,
 });
 
 const mapDispatchToProps = (dispatch) => ({

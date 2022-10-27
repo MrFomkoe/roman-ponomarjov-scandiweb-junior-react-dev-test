@@ -1,8 +1,10 @@
 /* Container settings */
 
-.container {
+.detailed-view-container {
+  width: 100%;
+  padding: 0 6.25rem;
   display: flex;
-  margin-top: 2.5rem;
+  margin-top: 10rem;
   gap: 6.25rem;
 }
 
@@ -11,17 +13,17 @@
 .product-image {
   display: flex;
   gap: 2.5rem;
-  border: solid 2px yellow;
 }
 
 .image-slider {
+  display: flex;
+  flex-direction: column;
   width: 80px;
-  border: 2px solid black;
 }
 
 .image-slider .image-container {
   height: 80px;
-  width: 100%;
+  width: 80px;
   margin-bottom: 2rem;
 }
 
@@ -29,16 +31,15 @@
   cursor: pointer;
 }
 
-.full-image {
+.main-image {
   display: flex;
   justify-content: center;
   width: 610px;
   height: 510px;
-  border: 2px solid red;
   object-fit: contain;
 }
 
-.image-single {
+.image-unit {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -81,7 +82,7 @@
 
 .product-form.detailed-view label {
   padding: 0;
-  margin-bottom: 1.5rem; 
+  margin-bottom: 1.5rem;
 }
 
 .product-form.detailed-view .product-form__atribute {
@@ -93,7 +94,7 @@
 }
 
 .product-form.detailed-view span:hover {
-  filter: none
+  filter: none;
 }
 
 .add-to-cart-btn {
@@ -104,10 +105,78 @@
   align-items: center;
   width: 292px;
   height: 52px;
+  margin-bottom: 2.5rem;
 
-  color: #FFFFFF;
-  background: #5ECE7B;
+  color: #ffffff;
+  background: #5ece7b;
 
   font-size: 1rem;
   font-weight: 600;
+}
+
+.product-price {
+  margin-bottom: 1.25rem;
+}
+
+.product-price h3 {
+  font-family: "Roboto Condensed";
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.product-price span {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.product-description-text > * {
+  font-family: "Roboto" !important;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 1300px) {
+  .main-image {
+    width: 400px;
+    max-height: auto;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .detailed-view-container {
+    gap: 2rem;
+  }
+
+  .product-image {
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 400px;
+  }
+
+  .main-image {
+    max-height: 300px;
+  }
+
+  .image-slider {
+    max-height: 400px;
+    width: 100px;
+
+    display: flex;
+    gap: 1rem;
+    order: 2;
+
+    transform: rotate(-90deg) translatey(-100px);
+    transform-origin: right top;
+    overflow-x: hidden;
+    direction: rtl;
+  }
+
+  .image-slider .image-container {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    transform: rotate(90deg);
+  }
 }

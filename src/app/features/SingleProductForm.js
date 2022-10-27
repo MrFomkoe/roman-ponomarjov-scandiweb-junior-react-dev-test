@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { cartIconBig } from "../../app/icons";
+import { cartIconBig } from "../icons";
 
 export class SingleProductForm extends Component {
   constructor(props) {

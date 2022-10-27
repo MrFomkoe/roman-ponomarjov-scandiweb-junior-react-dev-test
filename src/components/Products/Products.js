@@ -40,7 +40,7 @@ class Products extends Component {
 
     return (
       <div className="page-container">
-        <h2>{this.props.currentCategory}</h2>
+        <h2 className="category-name">{this.props.currentCategory}</h2>
         <div className="all-products-container">
           {isLoading ? (
             <p>Loading...</p>

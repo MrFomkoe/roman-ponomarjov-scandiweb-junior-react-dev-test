@@ -5,8 +5,7 @@ import { Navbar } from "../components/Navbar/Navbar";
 import ProductDetails from "../components/ProductDetails/ProductDetailedView";
 import Products from "../components/Products/Products";
 
-
-import './app.css';
+import "./app.css";
 
 class App extends Component {
   render() {
@@ -23,7 +22,6 @@ class App extends Component {
               <Route exact path="/" element={<Products />} />
               <Route exact path="/:category" element={<Products />} />
               <Route exact path="/products/:id" element={<ProductDetails />} />
-              
             </Routes>
           )}
         </div>

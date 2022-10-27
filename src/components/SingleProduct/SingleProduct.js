@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../slices/cartSlice";
 import "./singleProduct.css";
-import { SingleProductForm } from "./SingleProductForm";
+import { SingleProductForm } from "../../app/features/SingleProductForm";
 import { Link } from "react-router-dom";
 import { cartIconBig } from "../../app/icons";
 

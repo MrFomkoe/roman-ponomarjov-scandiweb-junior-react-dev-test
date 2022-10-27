@@ -1,16 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
 
 /* General settings */
 
-html {
-  overflow: scroll;
-}
-
 * {
   box-sizing: border-box;
+}
+
+html {
+  overflow: scroll;
   font-family: 'Raleway';
-  color: #1D1F22;
   line-height: 160%;
+  color: #1D1F22;
+  margin-bottom: 5rem;
 }
 
 a,
@@ -21,7 +23,6 @@ a:focus {
 
 ul,
 ul > * {
-  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -34,9 +35,6 @@ button {
 /* Components' settings */
 
 .app {
-  padding: 0 6.25rem;
-  width: 100%;
+  width: 100vw;
+  /* padding: 0 6.25rem; */
 }
-
-/*  */
-

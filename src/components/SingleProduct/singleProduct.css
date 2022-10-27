@@ -106,10 +106,10 @@
 }
 
 .product-form__section h3 {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Roboto Condensed';
   margin: 0;
   width: 100%;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   padding-left: 0.5rem;
 }
 
