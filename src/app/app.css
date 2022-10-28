@@ -7,12 +7,14 @@
   box-sizing: border-box;
 }
 
-html {
-  overflow: scroll;
+body {
+  overflow-y: scroll;
   font-family: 'Raleway';
   line-height: 160%;
   color: #1D1F22;
   margin-bottom: 5rem;
+  padding: 0;
+  margin: 0;
 }
 
 a,
@@ -35,6 +37,5 @@ button {
 /* Components' settings */
 
 .app {
-  width: 100vw;
-  /* padding: 0 6.25rem; */
+  width: 100%;
 }

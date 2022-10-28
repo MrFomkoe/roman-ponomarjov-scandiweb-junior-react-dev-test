@@ -1,29 +1,32 @@
-.cart-overlay-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 2rem;
-  width: 50px;
+.cart-overlay {
+  top: 0;
+  z-index: 69;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(57, 55, 72, 0.22);
 }
 
-.cart-overlay-product-amount {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+.mini-cart {
   position: absolute;
-  left: 15px;
-  bottom: 15px;
+  top: 80px;
+  right: 100px;
+  padding: 2rem 1rem;
+  
+  width: 325px;
+  height: 680px;
+  background: #ffffff;
+}
 
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+.mini-cart-heading {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
 
-  color: #ffffff;
-  background: #000000;
-
-  font-family: "Roboto";
+.mini-cart-bold {
   font-weight: 700;
-  font-size: 0.875rem;
-  line-height: 100%;
+}
+
+.mini-cart-item-amount {
+  font-weight: 500;
 }

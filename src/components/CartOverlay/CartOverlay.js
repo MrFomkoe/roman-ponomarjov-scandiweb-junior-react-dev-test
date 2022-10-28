@@ -1,27 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { emptyCartIcon } from "../../app/icons";
-import "./cartOverlay.css"
+import { showCartOverlay } from "../slices/cartSlice";
+import "./cartOverlay.css";
 
-class CartOverlay extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render () {
-    const {cartItem, numOfProducts, totalSum} = this.props.cart;
+class MiniCart extends Component {
+  render() {
+    const { cartItems, totalSum, showCartOverlay, numOfProducts } =
+      this.props.cart;
 
     return (
-      <div className="cart-overlay-container">
-        <button className="cart-overlay-button">
-          {emptyCartIcon()}
+      <div>
+        {showCartOverlay && (
+          <div className="cart-overlay">
+            <div className="mini-cart">
+              <h2 className="mini-cart-heading">
+                <span className="mini-cart-bold"> My Bag</span>
+                <span className="mini-cart-item-amount">
+                  {numOfProducts === null ? (
+                    " is empty."
+                  ) : (
+                    `, ${numOfProducts} ${numOfProducts > 1 ? "items" : "item"}`
+                  )}
+                </span>
+              </h2>
 
-          {numOfProducts && <span className="cart-overlay-product-amount">{numOfProducts}</span>}
-
-          
-        </button>
+              
+            </div>
+          </div>
+        )}
       </div>
-      )
+    );
   }
 }
 
@@ -30,6 +38,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  showCartOverlay: () => dispatch(showCartOverlay()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartOverlay);
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);

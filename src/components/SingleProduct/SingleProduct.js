@@ -55,40 +55,44 @@ class SingleProduct extends Component {
   }
 
   handleSubmit(event) {
+    // Prevent page reload
     event.preventDefault();
+    // Reset form
     event.target.reset();
 
+    // Variables
     const { newProductAttributes } = this.state;
     const { brand, id, name, prices } = this.props.product;
 
     // Creates unique id for selected product
-    const attributesArray = Object.values(newProductAttributes);
+    const attributesArray = Object.values(newProductAttributes).map(attribute => attribute.id);
     attributesArray.unshift(id);
     const productUniqueId = attributesArray.join("-").toLowerCase();
 
+    // Add item to cart
     this.props.addItemToCart({
       initialId: id,
       id: productUniqueId,
       name: name,
       brand: brand,
-      attributes: this.state.newProductAttributes,
+      attributes: newProductAttributes,
+      prices: prices,
     });
 
+    // Reset attributes state
     this.setState((prevState) => ({
       ...prevState,
       newProductAttributes: {},
     }));
   }
 
-  handleAttributesChange(inId, event) {
-    const id = inId.toLowerCase();
-
+  handleAttributesChange(name, property) {
     this.setState((prevState) => {
       return {
         ...prevState,
         newProductAttributes: {
           ...prevState.newProductAttributes,
-          [id]: event.target.value,
+          [name]: property,
         },
       };
     });

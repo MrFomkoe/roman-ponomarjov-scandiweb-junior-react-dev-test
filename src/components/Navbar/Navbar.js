@@ -4,8 +4,7 @@ import CurrencyChanger from "../CurrencyChanger/CurrencyChanger";
 import Navigation from "./Navigation";
 import "./navbar.css";
 import { logoIcon } from "../../app/icons";
-import CartOverlay from "../CartOverlay/CartOverlay";
-
+import CartOverlayControls from "../CartOverlayControls/CartOverlayControls";
 
 export class Navbar extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ export class Navbar extends Component {
         {logoIcon()}
         <div className="navbar-control-section">
           <CurrencyChanger />
-          <CartOverlay />
+          <CartOverlayControls />
         </div>
       </div>
     );

@@ -31,41 +31,44 @@ class ProductDetails extends Component {
     loadSingleProduct(id);
   }
 
-  handleAttributesChange(inId, event) {
-    const id = inId.toLowerCase();
-
+  handleAttributesChange(name, property) {
     this.setState((prevState) => {
       return {
         ...prevState,
         newProductAttributes: {
           ...prevState.newProductAttributes,
-          [id]: event.target.value,
+          [name]: property,
         },
       };
     });
   }
 
   handleSubmit(event) {
-    console.log("click");
+    // Prevent page reload
     event.preventDefault();
+    // Reset form
     event.target.reset();
 
+    // Variables
     const { newProductAttributes } = this.state;
     const { brand, id, name, prices } = this.props.productData;
 
     // Creates unique id for selected product
-    const attributesArray = Object.values(newProductAttributes);
+    const attributesArray = Object.values(newProductAttributes).map(attribute => attribute.id);
     attributesArray.unshift(id);
     const productUniqueId = attributesArray.join("-").toLowerCase();
 
+    // Add item to cart
     this.props.addItemToCart({
       initialId: id,
       id: productUniqueId,
       name: name,
       brand: brand,
-      attributes: this.state.newProductAttributes,
+      attributes: newProductAttributes,
+      prices: prices,
     });
 
+    // Reset attributes state
     this.setState((prevState) => ({
       ...prevState,
       newProductAttributes: {},
@@ -100,6 +103,8 @@ class ProductDetails extends Component {
       prices,
       description,
     } = this.props.productData;
+
+
     const priceToShow = prices.find(
       (price) => price.currency.label === currentCurrency.label
     );
@@ -159,7 +164,7 @@ class ProductDetails extends Component {
                 </button>
               ) : (
                 <button className="add-to-cart-btn out-of-stock-btn" disabled>
-                  PRODUCT OUT OF STOCK
+                  ITEM OUT OF STOCK
                 </button>
               )}
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MiniCart from "../components/CartOverlay/CartOverlay";
 import { Navbar } from "../components/Navbar/Navbar";
 import ProductDetails from "../components/ProductDetails/ProductDetailedView";
 import Products from "../components/Products/Products";
@@ -18,11 +19,18 @@ class App extends Component {
           {categoriesLoading ? (
             ""
           ) : (
-            <Routes>
-              <Route exact path="/" element={<Products />} />
-              <Route exact path="/:category" element={<Products />} />
-              <Route exact path="/products/:id" element={<ProductDetails />} />
-            </Routes>
+            <div className="">
+              <MiniCart />
+              <Routes>
+                <Route exact path="/" element={<Products />} />
+                <Route exact path="/:category" element={<Products />} />
+                <Route
+                  exact
+                  path="/products/:id"
+                  element={<ProductDetails />}
+                />
+              </Routes>
+            </div>
           )}
         </div>
       </BrowserRouter>
