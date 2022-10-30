@@ -1,8 +1,6 @@
 /* Container settings */
 
 .detailed-view-container {
-  width: 100%;
-  padding: 10rem 6.25rem 0rem;
   display: flex;
   gap: 6.25rem;
 }

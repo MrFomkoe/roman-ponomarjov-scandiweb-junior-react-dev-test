@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import CurrencyChanger from "../CurrencyChanger/CurrencyChanger";
 import Navigation from "./Navigation";
 import "./navbar.css";
-import { logoIcon } from "../../app/icons";
+import { logoIcon } from "../../app/helper-fuctions/icons";
 import CartOverlayControls from "../CartOverlayControls/CartOverlayControls";
 
 export class Navbar extends Component {

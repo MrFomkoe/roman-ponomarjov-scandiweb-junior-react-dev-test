@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { emptyCartIcon } from "../../app/icons";
+import { emptyCartIcon } from "../../app/helper-fuctions/icons";
 import { showCartOverlay } from "../slices/cartSlice";
 import "./cartOverlayControls.css";
 
@@ -13,12 +13,11 @@ class CartOverlayControls extends Component {
   }
 
   handleClick() {
-    console.log("clicked");
     this.props.showCartOverlay();
   }
 
   render() {
-    const { numOfProducts } = this.props.cart;
+    const { numOfProducts, showCartOverlay } = this.props.cart;
 
     return (
       <div className="cart-overlay-controls">
@@ -27,7 +26,7 @@ class CartOverlayControls extends Component {
           onClick={(e) => this.handleClick()}
         >
           {emptyCartIcon()}
-          {numOfProducts && (
+          {numOfProducts > 0 && (
             <span className="cart-overlay-product-amount">{numOfProducts}</span>
           )}
         </button>

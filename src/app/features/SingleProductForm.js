@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { cartIconBig } from "../icons";
+import { cartIconBig } from "../helper-fuctions/icons";
 
 export class SingleProductForm extends Component {
   constructor(props) {
@@ -11,7 +11,6 @@ export class SingleProductForm extends Component {
 
   renderAttribute(attribute) {
     const { id, items, name, type } = attribute;
-    const { detailedView } = this.props;
 
     const allValues = items.map(item => item.value)
 

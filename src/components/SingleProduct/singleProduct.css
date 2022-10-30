@@ -135,7 +135,7 @@ label input {
 
 label span {
   cursor: pointer;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Sans Pro';
   font-weight: 600;
   font-size: 1.125rem;
 

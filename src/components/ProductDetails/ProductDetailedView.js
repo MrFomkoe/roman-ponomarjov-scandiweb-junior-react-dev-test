@@ -37,7 +37,11 @@ class ProductDetails extends Component {
         ...prevState,
         newProductAttributes: {
           ...prevState.newProductAttributes,
-          [name]: property,
+          // Creating nested object, so the property could be updated if another button is clicked
+          [name]: {
+            ...property,
+            name: name,
+          },
         },
       };
     });
@@ -49,14 +53,23 @@ class ProductDetails extends Component {
     // Reset form
     event.target.reset();
 
-    // Variables
+    // Variables 
     const { newProductAttributes } = this.state;
-    const { brand, id, name, prices } = this.props.productData;
+    const { brand, id, name, prices, gallery } = this.props.productData;
 
     // Creates unique id for selected product
-    const attributesArray = Object.values(newProductAttributes).map(attribute => attribute.id);
-    attributesArray.unshift(id);
-    const productUniqueId = attributesArray.join("-").toLowerCase();
+    const attributeNameArray = Object.values(newProductAttributes).map(attribute => attribute.id);
+    attributeNameArray.unshift(id);
+    const productUniqueId = attributeNameArray.join("-").toLowerCase();
+
+    // Creating attributes array which will contain all data of the attribute
+    const attributesArray = [];
+    for (const key in newProductAttributes) {
+      if (Object.hasOwnProperty.call(newProductAttributes, key)) {
+        const element = newProductAttributes[key];
+        attributesArray.push(element);
+      }
+    }
 
     // Add item to cart
     this.props.addItemToCart({
@@ -64,8 +77,9 @@ class ProductDetails extends Component {
       id: productUniqueId,
       name: name,
       brand: brand,
-      attributes: newProductAttributes,
+      attributes: attributesArray,
       prices: prices,
+      gallery: gallery,
     });
 
     // Reset attributes state

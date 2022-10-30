@@ -39,3 +39,9 @@ button {
 .app {
   width: 100%;
 }
+
+.app-wrapper {
+  width: 100%;
+  position: relative;
+  padding: 10rem 6.25rem 0rem;
+}

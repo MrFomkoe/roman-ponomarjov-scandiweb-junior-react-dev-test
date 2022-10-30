@@ -17,7 +17,9 @@ export const cartSlice = createSlice({
       };
 
       // Check if the item added to cart is already present
-      const itemInCartAlready = cartItems.findIndex((item) => item.id === newItem.id);
+      const itemInCartAlready = cartItems.findIndex(
+        (item) => item.id === newItem.id
+      );
 
       // If not - add item to cart. Else - increse quantity
       if (itemInCartAlready === -1) {
@@ -26,18 +28,57 @@ export const cartSlice = createSlice({
         const presentItem = cartItems.find((item) => item.id === newItem.id);
         presentItem.quantity += 1;
       }
-
-      // Calculate total amount of product instances
-      state.numOfProducts = cartItems.length;
+      state.numOfProducts += 1;
     },
-    removeItemFromCart: (state, action) => {},
 
     showCartOverlay: (state, action) => {
+      console.log('click')
       state.showCartOverlay = !state.showCartOverlay;
+    },
+
+    increaseAmount: (state, action) => {
+      const inItem = action.payload;
+      const cartItem = state.cartItems.find((item) => item.id === inItem);
+      cartItem.quantity += 1;
+      state.numOfProducts += 1;
+    },
+
+    decreaseAmount: (state, action) => {
+      const inItem = action.payload;
+      const cartItem = state.cartItems.find((item) => item.id === inItem);
+
+      if (cartItem.quantity > 1) {
+        cartItem.quantity -= 1;
+      } else {
+        const newItemList = state.cartItems.filter(
+          (item) => item.id !== cartItem.id
+        );
+        state.cartItems = newItemList;
+      }
+      state.numOfProducts -= 1;
+    },
+
+    calculateTotalSum: (state, action) => {
+      let totalSum = Number();
+
+      state.cartItems.map((item) => {
+        const itemPrice = item.prices.find(
+          (price) => price.currency.label === action.payload.label
+        ).amount;
+        const sumForItem = item.quantity * itemPrice;
+        totalSum += sumForItem;
+      });
+      state.totalSum = totalSum.toFixed(2);
     },
   },
 });
 
-export const { addItemToCart, removeItemFromCart, showCartOverlay } = cartSlice.actions;
+export const {
+  addItemToCart,
+  showCartOverlay,
+  increaseAmount,
+  decreaseAmount,
+  calculateTotalSum,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
