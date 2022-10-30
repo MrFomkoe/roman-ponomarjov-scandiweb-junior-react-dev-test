@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { renderCartItemAttributes } from "../../app/helper-fuctions/functions";
 import {
   showCartOverlay,
   increaseAmount,
@@ -15,7 +16,6 @@ class CartOverlay extends Component {
 
     this.wrapperRef = React.createRef();
     this.renderCartItems = this.renderCartItems.bind(this);
-    this.renderCartItemAttributes = this.renderCartItemAttributes.bind(this);
   }
 
   componentDidMount() {
@@ -33,46 +33,10 @@ class CartOverlay extends Component {
     }
   }
 
-  renderCartItemAttributes(attributes) {
-    return attributes.map((attribute) => {
-      const { name, type, value, allValues } = attribute;
-      return (
-        <div key={name} className="cart-overlay-item__attribute">
-          <span>{name}</span>
-          <br />
-          {allValues.map((singleValue) => {
-            const selectedValue = value === singleValue ? true : false;
 
-            if (type === "swatch") {
-              return (
-                <div
-                  key={singleValue}
-                  style={{ background: singleValue }}
-                  className={`cart-overlay-item__color ${
-                    selectedValue && "selected"
-                  }`}
-                ></div>
-              );
-            } else {
-              return (
-                <div
-                  key={singleValue}
-                  className={`cart-overlay-item__text ${
-                    selectedValue && "selected"
-                  }`}
-                >
-                  {singleValue}
-                </div>
-              );
-            }
-          })}
-        </div>
-      );
-    });
-  }
 
   renderCartItems(cartItems) {
-    return cartItems.map((item, index) => {
+    return cartItems.map((item) => {
       const { currentCurrency } = this.props;
       const priceToShow = item.prices.find(
         (price) => price.currency.label === currentCurrency.label
@@ -92,7 +56,7 @@ class CartOverlay extends Component {
               </span>
 
               <div className="cart-overlay-item__attributes">
-                {this.renderCartItemAttributes(item.attributes)}
+                {renderCartItemAttributes(item.attributes, 'cart-overlay')}
               </div>
             </div>
 
@@ -161,7 +125,7 @@ class CartOverlay extends Component {
                 >
                   VIEW BAG
                 </Link>
-                <button className="cart-overlay-links__check">CHECK OUT</button>
+                <button className={`cart-overlay-links__check ${numOfProducts < 1 && 'inactive'}`} disabled={numOfProducts < 1 && true}>CHECK OUT</button>
               </div>
             </div>
           </div>

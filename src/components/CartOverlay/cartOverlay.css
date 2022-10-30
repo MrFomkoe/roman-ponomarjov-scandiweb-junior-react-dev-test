@@ -211,18 +211,23 @@
   align-items: center;
   width: 140px;
   height: 43px;
-}
-
-.cart-overlay-links__cart {
-  color: #1D1F22;
-  border: 1px solid #1D1F22;
-  background: #FFFFFF;
 
   font-weight: 600;
   line-height: 120%;
   font-size: 0.875rem;
 }
 
+.cart-overlay-links__cart {
+  color: #1D1F22;
+  border: 1px solid #1D1F22;
+  background: #FFFFFF;
+}
+
 .cart-overlay-links__check {
   background: #5ECE7B;
+  color: #FFFFFF;
+}
+
+.cart-overlay-links__check.inactive {
+  background: rgba(57, 55, 72, 0.22);;
 }
