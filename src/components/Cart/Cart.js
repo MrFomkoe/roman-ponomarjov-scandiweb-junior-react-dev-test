@@ -13,6 +13,7 @@ class Cart extends Component {
     super(props);
   }
 
+  // Checking and displaying current sum of order depending on the current currency
   componentDidUpdate(prevProps) {
     if (
       prevProps.cart.numOfProducts !== this.props.cart.numOfProducts ||
@@ -27,6 +28,9 @@ class Cart extends Component {
     const { cartItems, totalSum, numOfProducts } = this.props.cart;
     const { currentCurrency, increaseAmount, decreaseAmount } = this.props;
     const cartType = "cart";
+
+    // Waiting for the current currency to be assigned
+    if (!currentCurrency) return
 
     return (
       <div className="cart-container">
@@ -70,6 +74,7 @@ class Cart extends Component {
 const mapStateToProps = (state) => ({
   cart: state.cart,
   currentCurrency: state.currencies.currentCurrency,
+  isLoading: state.currencies.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

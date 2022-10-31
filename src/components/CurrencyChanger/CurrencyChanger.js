@@ -32,10 +32,12 @@ class CurrencyChanger extends Component {
     }
   }
 
+  // Adding outside click event to close the switcher
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleOutsideClick); 
   }
 
+  // Currency symbol button action handler
   handleClick() {
     this.setState({
       collapseCurrencyChanger: this.state.collapseCurrencyChanger
@@ -44,6 +46,7 @@ class CurrencyChanger extends Component {
     });
   }
 
+  // Currency change handler
   handleCurrencyChange(currency) {
     const { switchCurrency } = this.props;
     switchCurrency(currency);
@@ -52,6 +55,7 @@ class CurrencyChanger extends Component {
     })
   }
 
+  // Outside click handler
   handleOutsideClick(event) {
     if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
       if(this.state.collapseCurrencyChanger) {

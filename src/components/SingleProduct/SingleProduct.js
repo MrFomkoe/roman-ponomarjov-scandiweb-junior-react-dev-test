@@ -25,6 +25,7 @@ class SingleProduct extends Component {
     };
   }
 
+  // Handler for mouse enter to single product card, the product attributes form is being shown
   handleMouseEnter() {
     this.setState((prevState) => ({
       ...prevState,
@@ -32,6 +33,7 @@ class SingleProduct extends Component {
     }));
   }
 
+  // Handler for mouse leave - hide attributes form and clear data
   handleMouseLeave() {
     this.setState((prevState) => ({
       ...prevState,
@@ -40,9 +42,10 @@ class SingleProduct extends Component {
     }));
   }
 
+  // Submission of the product to cart in "simplifed view" (wihout attributes form)
   handleSimplifiedSubmit() {
     const { attributes, brand, id, name } = this.props.product;
-    
+
     if (attributes.length === 0) {
       this.props.addItemToCart({
         initialId: id,
@@ -54,13 +57,14 @@ class SingleProduct extends Component {
     }
   }
 
+  // Handing of the product's attributes changes
   handleAttributesChange(name, property) {
     this.setState((prevState) => {
       return {
         ...prevState,
         newProductAttributes: {
           ...prevState.newProductAttributes,
-          // Creating nested object, so the property could be updated if another button is clicked
+          // Creating nested object, so the property could be updated if another attribute is chosen
           [name]: {
             ...property,
             name: name,
@@ -70,18 +74,20 @@ class SingleProduct extends Component {
     });
   }
 
+  // Submission of the product to cart in "detailed view" (with attributes form)
   handleSubmit(event) {
     // Prevent page reload
     event.preventDefault();
-    // Reset form
+    // Reset form after submission
     event.target.reset();
 
-    // Variables 
     const { newProductAttributes } = this.state;
     const { brand, id, name, prices, gallery } = this.props.product;
 
     // Creates unique id for selected product
-    const attributeNameArray = Object.values(newProductAttributes).map(attribute => attribute.id);
+    const attributeNameArray = Object.values(newProductAttributes).map(
+      (attribute) => attribute.id
+    );
     attributeNameArray.unshift(id);
     const productUniqueId = attributeNameArray.join("-").toLowerCase();
 
@@ -142,14 +148,19 @@ class SingleProduct extends Component {
             className="product-attributes"
             style={{ backgroundImage: `url(${backgroundImage})` }}
           >
-            {/* Product attributes overlay 
+            {/* 
+              Product attributes overlay 
               Can be switched between simplified way of submission and detailed (with attribute selection)
-              */}
+              If the item is not in stock, it can't be added to cart
+            */}
             {detailedView && inStock && (
               <div>
-                {/* Simplified selection */}
+                {/* Simplified selection form */}
                 {simplifiedSelection ? (
-                  <button onClick={(e) => this.handleSimplifiedSubmit()} className="cart-icon-big">
+                  <button
+                    onClick={(e) => this.handleSimplifiedSubmit()}
+                    className="cart-icon-big"
+                  >
                     {cartIconBig()}
                   </button>
                 ) : (

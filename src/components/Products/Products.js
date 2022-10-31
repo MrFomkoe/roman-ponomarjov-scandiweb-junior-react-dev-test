@@ -11,6 +11,8 @@ function withParams(Component) {
 }
 
 class Products extends Component {
+
+  // After mount of the component, the product category is being loaded
   async componentDidMount() {
     const {
       defaultCategory,
@@ -27,6 +29,7 @@ class Products extends Component {
     }
   }
 
+  // When category updates, its products are being loaded 
   componentDidUpdate(prevProps, prevState) {
     const { currentCategory, loadCategoryProducts } = this.props;
     if (currentCategory !== prevProps.currentCategory) {

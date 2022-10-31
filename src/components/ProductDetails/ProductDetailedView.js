@@ -25,12 +25,14 @@ class ProductDetails extends Component {
     this.changeImage = this.changeImage.bind(this);
   }
 
+  // Upon mount of the component, its details are being loaded from server
   componentDidMount() {
     const { id } = this.props.params;
     const { loadSingleProduct } = this.props;
     loadSingleProduct(id);
   }
 
+  // Handing of the product's attributes changes
   handleAttributesChange(name, property) {
     this.setState((prevState) => {
       return {
@@ -89,6 +91,7 @@ class ProductDetails extends Component {
     }));
   }
 
+  // Change of the current "main" image being displayed
   changeImage({ target }) {
     const imageSrc = target.src;
     this.setState((prevState) => {
@@ -168,6 +171,7 @@ class ProductDetails extends Component {
                 </span>
               </div>
 
+              {/* If item is not in stock, the "add" button will be inactive */}
               {inStock ? (
                 <button
                   type="submit"

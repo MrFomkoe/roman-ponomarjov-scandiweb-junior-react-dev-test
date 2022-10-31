@@ -12,6 +12,7 @@ class CartOverlayControls extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // Handler for cart button to open or close overlay cart
   handleClick() {
     this.props.showCartOverlay();
   }
@@ -26,6 +27,8 @@ class CartOverlayControls extends Component {
           onClick={(e) => this.handleClick()}
         >
           {emptyCartIcon()}
+
+          {/* Icon with amount of items */}
           {numOfProducts > 0 && (
             <span className="cart-overlay-product-amount">{numOfProducts}</span>
           )}

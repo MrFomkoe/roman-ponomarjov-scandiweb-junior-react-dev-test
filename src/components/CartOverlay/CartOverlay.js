@@ -22,6 +22,7 @@ class CartOverlay extends Component {
     calculateTotalSum(currentCurrency);
   }
 
+  // Checking and displaying current sum of order depending on the current currency
   componentDidUpdate(prevProps) {
     if (
       prevProps.cart.numOfProducts !== this.props.cart.numOfProducts ||
