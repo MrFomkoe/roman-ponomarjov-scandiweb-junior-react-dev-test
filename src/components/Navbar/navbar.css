@@ -17,6 +17,12 @@
   width: 30%;
 }
 
+.shop-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Navigation links */
 
 .navigation {
@@ -63,4 +69,10 @@
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
+}
+
+@media screen and (max-width: 970px) {
+  .shop-icon {
+    justify-content: end;
+  }
 }

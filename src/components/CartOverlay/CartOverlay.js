@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { renderCartItemAttributes } from "../../app/helper-fuctions/functions";
+import { CartItem } from "../../app/features/CartItem";
 import {
   showCartOverlay,
   increaseAmount,
@@ -15,7 +15,6 @@ class CartOverlay extends Component {
     super(props);
 
     this.wrapperRef = React.createRef();
-    this.renderCartItems = this.renderCartItems.bind(this);
   }
 
   componentDidMount() {
@@ -34,61 +33,12 @@ class CartOverlay extends Component {
   }
 
 
-
-  renderCartItems(cartItems) {
-    return cartItems.map((item) => {
-      const { currentCurrency } = this.props;
-      const priceToShow = item.prices.find(
-        (price) => price.currency.label === currentCurrency.label
-      );
-
-      return (
-        <div key={item.id} className="cart-overlay-item">
-          <div className="cart-overlay-item__description">
-            <div className="cart-overlay-item__details">
-              <h4>
-                <span>{item.brand}</span>
-                <br />
-                <span>{item.name}</span>
-              </h4>
-              <span className="cart-overlay-item__price">
-                {priceToShow.currency.symbol} {priceToShow.amount}
-              </span>
-
-              <div className="cart-overlay-item__attributes">
-                {renderCartItemAttributes(item.attributes, 'cart-overlay')}
-              </div>
-            </div>
-
-            <div className="cart-overlay-item__controls">
-              <button
-                className="cart-overlay-item__btn"
-                onClick={(e) => this.props.increaseAmount(item.id)}
-              >
-                +
-              </button>
-              <span className="cart-overlay-item__amount">{item.quantity}</span>
-              <button
-                className="cart-overlay-item__btn"
-                onClick={(e) => this.props.decreaseAmount(item.id)}
-              >
-                -
-              </button>
-            </div>
-          </div>
-          <div className="cart-overlay-item__photo">
-            <img src={item.gallery[0]} />
-          </div>
-        </div>
-      );
-    });
-  }
-
   render() {
     const { cartItems, totalSum, showCartOverlay, numOfProducts } =
       this.props.cart;
 
-    const { currentCurrency } = this.props;
+    const { currentCurrency, increaseAmount, decreaseAmount } = this.props;
+    const cartType = "cart-overlay";
 
     return (
       <div>
@@ -107,7 +57,18 @@ class CartOverlay extends Component {
               </h2>
 
               <div className="cart-overlay-items">
-                {this.renderCartItems(cartItems)}
+                {cartItems.map((item, index) => {
+                  return (
+                    <CartItem
+                      key={index}
+                      cartType={cartType}
+                      increaseAmount={increaseAmount}
+                      decreaseAmount={decreaseAmount}
+                      currentCurrency={currentCurrency}
+                      item={item}
+                    />
+                  );
+                })}
               </div>
 
               <div className="cart-overlay-total-sum">
@@ -125,7 +86,14 @@ class CartOverlay extends Component {
                 >
                   VIEW BAG
                 </Link>
-                <button className={`cart-overlay-links__check ${numOfProducts < 1 && 'inactive'}`} disabled={numOfProducts < 1 && true}>CHECK OUT</button>
+                <button
+                  className={`cart-overlay-links__check ${
+                    numOfProducts < 1 && "inactive"
+                  }`}
+                  disabled={numOfProducts < 1 && true}
+                >
+                  CHECK OUT
+                </button>
               </div>
             </div>
           </div>

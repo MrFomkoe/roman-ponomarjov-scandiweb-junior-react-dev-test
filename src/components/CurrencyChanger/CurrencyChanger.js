@@ -21,6 +21,8 @@ class CurrencyChanger extends Component {
     document.addEventListener("mousedown", this.handleOutsideClick);
     const { loadCurrencies, switchCurrency } = this.props;
     const { currencies } = this.props.currencies;
+
+    // Upon the first run of app, currencies will be loaded and switched to "default" - first in array
     if (!currencies) {
       await loadCurrencies();
       const { currentCurrency, defaultCurrency } = this.props.currencies;
@@ -61,8 +63,6 @@ class CurrencyChanger extends Component {
   }
 
   render() {
-    const { isLoading } = this.props.currencies;
-
 
     const { currencies, currentCurrency } = this.props.currencies;
     const { collapseCurrencyChanger } = this.state;

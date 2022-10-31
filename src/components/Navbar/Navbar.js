@@ -15,7 +15,7 @@ export class Navbar extends Component {
     return (
       <div className="navbar">
         <Navigation />
-        {logoIcon()}
+        <div className="shop-icon">{logoIcon()}</div>
         <div className="navbar-control-section">
           <CurrencyChanger />
           <CartOverlayControls />

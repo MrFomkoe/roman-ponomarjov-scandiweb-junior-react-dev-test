@@ -26,6 +26,7 @@ class Navigation extends Component {
     const { categories, defaultCategory, isLoading } = this.props.categories;
     return (
       <nav className="navigation">
+        {/* Vaiting for categories to be fetched from server */}
         {isLoading ? (
           ""
         ) : (
