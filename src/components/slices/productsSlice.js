@@ -5,7 +5,7 @@ const url = "http://localhost:4000/";
 
 export const loadCategoryProducts = createAsyncThunk(
   "products/loadCategoryProducts",
-  async (category) => {
+  async (category) => { 
     const query = gql`
       {
         category(input: {title: "${category}"}) {
