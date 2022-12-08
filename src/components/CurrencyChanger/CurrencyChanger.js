@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { chevronDown, chevronUp } from "../../app/helper-fuctions/icons";
-import { loadCurrencies, switchCurrency } from "../slices/currencySlice";
-import "./currencyChanger.css";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { chevronDown, chevronUp } from '../../app/helper-fuctions/icons';
+import { loadCurrencies, switchCurrency } from '../slices/currencySlice';
+import './currencyChanger.css';
 
 class CurrencyChanger extends PureComponent {
   constructor(props) {
@@ -11,14 +11,14 @@ class CurrencyChanger extends PureComponent {
       collapseCurrencyChanger: false,
     };
 
-    this.wrapperRef =  React.createRef();
+    this.wrapperRef = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   async componentDidMount() {
-    document.addEventListener("mousedown", this.handleOutsideClick);
+    document.addEventListener('mousedown', this.handleOutsideClick);
     const { loadCurrencies, switchCurrency } = this.props;
     const { currencies } = this.props.currencies;
 
@@ -34,7 +34,7 @@ class CurrencyChanger extends PureComponent {
 
   // Adding outside click event to close the switcher
   componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleOutsideClick); 
+    document.removeEventListener('mousedown', this.handleOutsideClick);
   }
 
   // Currency symbol button action handler
@@ -52,26 +52,27 @@ class CurrencyChanger extends PureComponent {
     switchCurrency(currency);
     this.setState({
       collapseCurrencyChanger: false,
-    })
+    });
   }
 
   // Outside click handler
   handleOutsideClick(event) {
     if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-      if(this.state.collapseCurrencyChanger) {
+      if (this.state.collapseCurrencyChanger) {
         this.setState({
           collapseCurrencyChanger: false,
-        })
+        });
       }
     }
   }
 
-  render() { 
-
+  render() {
     const { currencies, currentCurrency } = this.props.currencies;
     const { collapseCurrencyChanger } = this.state;
 
-    return (
+    return !currentCurrency ? (
+      ''
+    ) : (
       <div className="currency-container" ref={this.wrapperRef}>
         <button className="currency-preview" onClick={() => this.handleClick()}>
           <div className="currency-preview__inner">
@@ -83,9 +84,8 @@ class CurrencyChanger extends PureComponent {
         </button>
 
         <div
-          
           className={`currency-selector ${
-            !collapseCurrencyChanger && "hidden"
+            !collapseCurrencyChanger && 'hidden'
           }`}
         >
           {currencies.map((currency) => {
@@ -95,8 +95,14 @@ class CurrencyChanger extends PureComponent {
                 key={currency.label}
                 onClick={() => this.handleCurrencyChange(currency)}
               >
-                <span className="currency-selector__symbol"> {currency.symbol} </span>
-                <span className="currency-selector__label"> {currency.label} </span>
+                <span className="currency-selector__symbol">
+                  {' '}
+                  {currency.symbol}{' '}
+                </span>
+                <span className="currency-selector__label">
+                  {' '}
+                  {currency.label}{' '}
+                </span>
               </button>
             );
           })}

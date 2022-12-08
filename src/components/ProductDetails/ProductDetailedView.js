@@ -108,6 +108,10 @@ class ProductDetails extends PureComponent {
     const { isLoading, currentCurrency } = this.props;
     const { activeImage } = this.state;
 
+    if (isLoading) {
+      return
+    }
+
     const { attributes, brand, gallery, inStock, name, prices, description } =
       this.props.productData;
 
