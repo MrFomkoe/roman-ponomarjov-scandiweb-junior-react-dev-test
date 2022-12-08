@@ -58,14 +58,18 @@ export const cartSlice = createSlice({
     },
 
     calculateTotalSum: (state, action) => {
-      const totalSum = state.cartItems.map((item) => {
+      let newTotalSum = Number();
+
+      state.cartItems.map((item) => {
         const itemPrice = item.prices.find(
           (price) => price.currency.label === action.payload.label
         ).amount;
-        const sumForItem = (item.quantity * itemPrice).toFixed(2);
-        return sumForItem;
+        const sumForItem = item.quantity * itemPrice;
+        newTotalSum += sumForItem;
+        return newTotalSum
       });
-      state.totalSum = totalSum; 
+      state.totalSum = parseFloat(newTotalSum.toFixed(2));
+
     },
   },
 });

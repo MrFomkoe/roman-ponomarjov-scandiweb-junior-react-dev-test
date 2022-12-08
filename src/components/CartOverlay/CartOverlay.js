@@ -8,7 +8,7 @@ import {
   decreaseAmount,
   calculateTotalSum,
 } from '../slices/cartSlice';
-import './cartOverlay.css'; 
+import './cartOverlay.css';
 
 class CartOverlay extends PureComponent {
   constructor(props) {
@@ -34,14 +34,15 @@ class CartOverlay extends PureComponent {
   }
 
   render() {
-    const { cartItems, totalSum, numOfProducts } =
-      this.props.cart;
+    const { cartItems, totalSum, numOfProducts } = this.props.cart;
 
     const { currentCurrency, increaseAmount, decreaseAmount } = this.props;
     const cartType = 'cart-overlay';
 
     return (
-      <div className="cart-overlay-container">
+      <div>
+        <div className="cart-overlay-background"></div>
+        <div className="cart-overlay-container">
           <div className="cart-overlay">
             <h2 className="cart-overlay-heading">
               <span className="cart-overlay-heading__bold"> My Bag</span>
@@ -94,6 +95,7 @@ class CartOverlay extends PureComponent {
               </button>
             </div>
           </div>
+        </div>
       </div>
     );
   }

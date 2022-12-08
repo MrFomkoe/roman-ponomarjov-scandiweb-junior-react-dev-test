@@ -14,20 +14,22 @@ export class Navbar extends PureComponent {
     const { switchCategory } = this.props;
 
     return (
-      <div className="navbar">
-        <Navigation />
+      <div className="navbar-container">
+        <div className="navbar">
+          <Navigation />
 
-        <Link
-          className="shop-icon"
-          to="/"
-          onClick={() => switchCategory(defaultCategory)}
-        >
-          {logoIcon()}
-        </Link>
+          <Link
+            className="shop-icon"
+            to="/"
+            onClick={() => switchCategory(defaultCategory)}
+          >
+            {logoIcon()}
+          </Link>
 
-        <div className="navbar-control-section">
-          <CurrencyChanger />
-          <CartOverlayControls />
+          <div className="navbar-control-section">
+            <CurrencyChanger />
+            <CartOverlayControls />
+          </div>
         </div>
       </div>
     );
