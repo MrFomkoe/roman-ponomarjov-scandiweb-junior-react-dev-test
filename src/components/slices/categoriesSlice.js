@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { request, gql } from "graphql-request";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { request, gql } from 'graphql-request';
 
-const url = "http://localhost:4000/";
+const url = 'http://localhost:4000/';
 
 export const loadCategories = createAsyncThunk(
-  "categories/loadCategories",
+  'categories/loadCategories',
   async () => {
     const query = gql`
       {
@@ -20,7 +20,7 @@ export const loadCategories = createAsyncThunk(
 );
 
 export const categoriesSlice = createSlice({
-  name: "categories",
+  name: 'categories',
   initialState: {
     isLoading: true,
     hasError: false,
@@ -41,7 +41,7 @@ export const categoriesSlice = createSlice({
     [loadCategories.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.categories = action.payload.categories;
-      state.defaultCategory =  action.payload.categories[0].name;
+      state.defaultCategory = action.payload.categories[0].name;
     },
     [loadCategories.rejected]: (state) => {
       state.isLoading = false;

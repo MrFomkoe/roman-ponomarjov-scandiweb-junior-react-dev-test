@@ -8,7 +8,7 @@ import {
   decreaseAmount,
   calculateTotalSum,
 } from '../slices/cartSlice';
-import './cartOverlay.css';
+import './cartOverlay.css'; 
 
 class CartOverlay extends PureComponent {
   constructor(props) {

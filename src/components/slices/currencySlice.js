@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { request, gql } from "graphql-request";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { request, gql } from 'graphql-request';
 
-const url = "http://localhost:4000/";
+const url = 'http://localhost:4000/';
 
 export const loadCurrencies = createAsyncThunk(
-  "currencies/loadCurrencies",
+  'currencies/loadCurrencies',
   async () => {
     const query = gql`
       {
@@ -21,7 +21,7 @@ export const loadCurrencies = createAsyncThunk(
 );
 
 export const currenciesSlice = createSlice({
-  name: "currencies",
+  name: 'currencies',
   initialState: {
     isLoading: true,
     hasError: false,

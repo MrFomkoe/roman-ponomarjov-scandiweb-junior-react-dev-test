@@ -1,9 +1,8 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { loadCategories, switchCategory } from "../slices/categoriesSlice";
-import "./navbar.css";
-
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { loadCategories, switchCategory } from '../slices/categoriesSlice';
+import './navbar.css';
 
 class Navigation extends PureComponent {
   constructor(props) {
@@ -29,7 +28,7 @@ class Navigation extends PureComponent {
       <nav className="navigation">
         {/* Vaiting for categories to be fetched from server */}
         {isLoading ? (
-          ""
+          ''
         ) : (
           <ul className="navigation-list">
             {categories.map((category) => {
@@ -40,7 +39,7 @@ class Navigation extends PureComponent {
                 >
                   <NavLink
                     className={({ isActive }) =>
-                      isActive ? "nav-link nav-link-active" : "nav-link"
+                      isActive ? 'nav-link nav-link-active' : 'nav-link'
                     }
                     to={
                       category.name !== defaultCategory

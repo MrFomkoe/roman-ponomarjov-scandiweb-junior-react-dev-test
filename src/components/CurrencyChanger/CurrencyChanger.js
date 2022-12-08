@@ -66,14 +66,10 @@ class CurrencyChanger extends PureComponent {
     }
   }
 
-  render() {
+  render() { 
 
     const { currencies, currentCurrency } = this.props.currencies;
     const { collapseCurrencyChanger } = this.state;
-
-    {if (!currentCurrency) {
-      return
-    }}
 
     return (
       <div className="currency-container" ref={this.wrapperRef}>

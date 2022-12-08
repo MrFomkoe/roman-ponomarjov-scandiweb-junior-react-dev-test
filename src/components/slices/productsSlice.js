@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { request, gql } from "graphql-request";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { request, gql } from 'graphql-request';
 
-const url = "http://localhost:4000/";
+const url = 'http://localhost:4000/';
 
 export const loadCategoryProducts = createAsyncThunk(
-  "products/loadCategoryProducts",
-  async (category) => { 
+  'products/loadCategoryProducts',
+  async (category) => {
     const query = gql`
       {
         category(input: {title: "${category}"}) {
@@ -43,7 +43,7 @@ export const loadCategoryProducts = createAsyncThunk(
 );
 
 export const loadSingleProduct = createAsyncThunk(
-  "products/loadSingleProduct",
+  'products/loadSingleProduct',
   async (productId) => {
     const query = gql`
       {
@@ -75,13 +75,13 @@ export const loadSingleProduct = createAsyncThunk(
       }
     `;
     const response = await request(url, query);
-    
+
     return response;
   }
 );
 
 export const productsSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState: {
     products: null,
     singleProduct: null,

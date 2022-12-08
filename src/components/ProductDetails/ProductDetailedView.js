@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import { SingleProductForm } from "../../app/features/SingleProductForm";
-import { addItemToCart } from "../slices/cartSlice";
-import { loadSingleProduct } from "../slices/productsSlice";
-import "./ProductDetailedView.css";
-import parse from "html-react-parser";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { SingleProductForm } from '../../app/features/SingleProductForm';
+import { addItemToCart } from '../slices/cartSlice';
+import { loadSingleProduct } from '../slices/productsSlice';
+import './ProductDetailedView.css';
+import parse from 'html-react-parser';
 
 function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
@@ -55,14 +55,16 @@ class ProductDetails extends PureComponent {
     // Reset form
     event.target.reset();
 
-    // Variables 
+    // Variables
     const { newProductAttributes } = this.state;
     const { brand, id, name, prices, gallery } = this.props.productData;
 
     // Creates unique id for selected product
-    const attributeNameArray = Object.values(newProductAttributes).map(attribute => attribute.id);
+    const attributeNameArray = Object.values(newProductAttributes).map(
+      (attribute) => attribute.id
+    );
     attributeNameArray.unshift(id);
-    const productUniqueId = attributeNameArray.join("-").toLowerCase();
+    const productUniqueId = attributeNameArray.join('-').toLowerCase();
 
     // Creating attributes array which will contain all data of the attribute
     const attributesArray = [];
@@ -106,21 +108,8 @@ class ProductDetails extends PureComponent {
     const { isLoading, currentCurrency } = this.props;
     const { activeImage } = this.state;
 
-    {
-      if (isLoading) return;
-    }
-
-    const {
-      id,
-      attributes,
-      brand,
-      gallery,
-      inStock,
-      name,
-      prices,
-      description,
-    } = this.props.productData;
-
+    const { attributes, brand, gallery, inStock, name, prices, description } =
+      this.props.productData;
 
     const priceToShow = prices.find(
       (price) => price.currency.label === currentCurrency.label
@@ -129,7 +118,7 @@ class ProductDetails extends PureComponent {
     return (
       <div>
         {isLoading ? (
-          ""
+          ''
         ) : (
           <div className="detailed-view-container">
             <div className="product-image">
@@ -141,6 +130,7 @@ class ProductDetails extends PureComponent {
                         className="image-unit"
                         src={image}
                         onClick={(e) => this.changeImage(e)}
+                        alt=""
                       />
                     </div>
                   );
@@ -150,6 +140,7 @@ class ProductDetails extends PureComponent {
                 <img
                   className="image-unit"
                   src={activeImage ? activeImage : gallery[0]}
+                  alt=""
                 />
               </div>
             </div>
@@ -167,7 +158,7 @@ class ProductDetails extends PureComponent {
               <div className="product-price">
                 <h3>PRICE:</h3>
                 <span>
-                  {priceToShow.currency.symbol} {priceToShow.amount}{" "}
+                  {priceToShow.currency.symbol} {priceToShow.amount}{' '}
                 </span>
               </div>
 

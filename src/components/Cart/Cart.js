@@ -8,10 +8,7 @@ import {
 } from "../slices/cartSlice";
 import "./cart.css";
 
-class Cart extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+class Cart extends PureComponent { 
 
   // Checking and displaying current sum of order depending on the current currency
   componentDidUpdate(prevProps) {

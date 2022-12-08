@@ -65,7 +65,7 @@ export const cartSlice = createSlice({
         const sumForItem = (item.quantity * itemPrice).toFixed(2);
         return sumForItem;
       });
-      state.totalSum = totalSum;
+      state.totalSum = totalSum; 
     },
   },
 });

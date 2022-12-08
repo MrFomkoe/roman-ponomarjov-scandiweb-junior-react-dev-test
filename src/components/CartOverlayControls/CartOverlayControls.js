@@ -18,7 +18,7 @@ class CartOverlayControls extends PureComponent {
   }
 
   render() {
-    const { numOfProducts, showCartOverlay } = this.props.cart;
+    const { numOfProducts } = this.props.cart; 
 
     return (
       <div className="cart-overlay-controls">

@@ -1,12 +1,12 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { addItemToCart } from "../slices/cartSlice";
-import "./singleProduct.css";
-import { SingleProductForm } from "../../app/features/SingleProductForm";
-import { Link } from "react-router-dom";
-import { cartIconBig } from "../../app/helper-fuctions/icons";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { addItemToCart } from '../slices/cartSlice';
+import './singleProduct.css';
+import { SingleProductForm } from '../../app/features/SingleProductForm';
+import { Link } from 'react-router-dom';
+import { cartIconBig } from '../../app/helper-fuctions/icons';
 
-class SingleProduct extends PureComponent {
+class SingleProduct extends PureComponent { 
   constructor(props) {
     super(props);
 
@@ -89,7 +89,7 @@ class SingleProduct extends PureComponent {
       (attribute) => attribute.id
     );
     attributeNameArray.unshift(id);
-    const productUniqueId = attributeNameArray.join("-").toLowerCase();
+    const productUniqueId = attributeNameArray.join('-').toLowerCase();
 
     // Creating attributes array which will contain all data of the attribute
     const attributesArray = [];
@@ -132,7 +132,7 @@ class SingleProduct extends PureComponent {
 
     return (
       <div
-        className={`product ${!inStock && "not-in-stock"}`}
+        className={`product ${!inStock && 'not-in-stock'}`}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >

@@ -1,17 +1,16 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import SingleProduct from "../SingleProduct/SingleProduct";
-import { switchCategory } from "../slices/categoriesSlice";
-import { loadCategoryProducts } from "../slices/productsSlice";
-import "./products.css";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import SingleProduct from '../SingleProduct/SingleProduct';
+import { switchCategory } from '../slices/categoriesSlice';
+import { loadCategoryProducts } from '../slices/productsSlice';
+import './products.css';
 
 function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
 }
 
-class Products extends PureComponent {
-
+class Products extends PureComponent { 
   // After mount of the component, the product category is being loaded
   async componentDidMount() {
     const {
@@ -29,7 +28,7 @@ class Products extends PureComponent {
     }
   }
 
-  // When category updates, its products are being loaded 
+  // When category updates, its products are being loaded
   componentDidUpdate(prevProps, prevState) {
     const { currentCategory, loadCategoryProducts } = this.props;
     if (currentCategory !== prevProps.currentCategory) {
@@ -72,10 +71,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadCategoryProducts: (categoryName) => dispatch(loadCategoryProducts(categoryName)),
+  loadCategoryProducts: (categoryName) =>
+    dispatch(loadCategoryProducts(categoryName)),
   switchCategory: (categoryName) => dispatch(switchCategory(categoryName)),
 });
-
 
 export default withParams(
   connect(mapStateToProps, mapDispatchToProps)(Products)
