@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { emptyCartIcon } from "../../app/helper-fuctions/icons";
 import { showCartOverlay } from "../slices/cartSlice";
 import "./cartOverlayControls.css";
 
 
-class CartOverlayControls extends Component {
+class CartOverlayControls extends PureComponent {
   constructor(props) {
     super(props);
 

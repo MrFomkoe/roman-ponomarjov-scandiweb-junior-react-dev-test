@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Cart from "../components/Cart/Cart";
@@ -7,9 +7,9 @@ import Navbar from "../components/Navbar/Navbar";
 import ProductDetails from "../components/ProductDetails/ProductDetailedView";
 import Products from "../components/Products/Products";
 
-import "./app.css";
+import "./app.css"; 
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     const {categoriesLoading, showCartOverlay} = this.props;
 

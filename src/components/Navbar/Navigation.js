@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { loadCategories, switchCategory } from "../slices/categoriesSlice";
 import "./navbar.css";
 
 
-class Navigation extends Component {
+class Navigation extends PureComponent {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);

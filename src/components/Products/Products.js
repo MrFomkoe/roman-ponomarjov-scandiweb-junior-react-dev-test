@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import SingleProduct from "../SingleProduct/SingleProduct";
@@ -10,7 +10,7 @@ function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
 }
 
-class Products extends Component {
+class Products extends PureComponent {
 
   // After mount of the component, the product category is being loaded
   async componentDidMount() {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CartItem } from '../../app/features/CartItem';
@@ -10,7 +10,7 @@ import {
 } from '../slices/cartSlice';
 import './cartOverlay.css';
 
-class CartOverlay extends Component {
+class CartOverlay extends PureComponent {
   constructor(props) {
     super(props);
 

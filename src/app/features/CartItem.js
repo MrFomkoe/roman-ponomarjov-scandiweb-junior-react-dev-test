@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { caretLeft, caretRight } from '../helper-fuctions/icons';
 
-export class CartItem extends Component {
+export class CartItem extends PureComponent {
   constructor(props) {
     super(props);
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import CurrencyChanger from '../CurrencyChanger/CurrencyChanger';
 import Navigation from './Navigation';
 import './navbar.css';
@@ -8,7 +8,7 @@ import { switchCategory } from '../slices/categoriesSlice';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export class Navbar extends Component {
+export class Navbar extends PureComponent {
   render() {
     const { defaultCategory } = this.props.categories;
     const { switchCategory } = this.props;

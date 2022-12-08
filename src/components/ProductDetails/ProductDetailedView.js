@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { SingleProductForm } from "../../app/features/SingleProductForm";
@@ -11,7 +11,7 @@ function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
 }
 
-class ProductDetails extends Component {
+class ProductDetails extends PureComponent {
   constructor(props) {
     super(props);
 

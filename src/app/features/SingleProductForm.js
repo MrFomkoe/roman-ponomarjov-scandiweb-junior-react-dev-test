@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { cartIconBig } from "../helper-fuctions/icons";
 
-export class SingleProductForm extends Component {
+export class SingleProductForm extends PureComponent {
   constructor(props) {
     super(props);
 

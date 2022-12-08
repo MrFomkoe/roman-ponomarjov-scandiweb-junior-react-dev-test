@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { chevronDown, chevronUp } from "../../app/helper-fuctions/icons";
 import { loadCurrencies, switchCurrency } from "../slices/currencySlice";
 import "./currencyChanger.css";
 
-class CurrencyChanger extends Component {
+class CurrencyChanger extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
