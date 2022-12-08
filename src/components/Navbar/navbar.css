@@ -1,9 +1,8 @@
 .navbar {
-
+  max-width: 1440px;
   z-index: 999;
   position: fixed;
   top: 0;
-  left: 0;
   height: 80px;
   width: 100%;
   display: flex;
@@ -73,6 +72,6 @@
 
 @media screen and (max-width: 970px) {
   .shop-icon {
-    justify-content: end;
+    justify-content: flex-end;
   }
 }

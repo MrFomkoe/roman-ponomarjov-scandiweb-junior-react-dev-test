@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addItemToCart, removeItemFromCart } from "../slices/cartSlice";
+import { addItemToCart } from "../slices/cartSlice";
 import "./singleProduct.css";
 import { SingleProductForm } from "../../app/features/SingleProductForm";
 import { Link } from "react-router-dom";
@@ -121,7 +121,6 @@ class SingleProduct extends Component {
   render() {
     const { attributes, brand, gallery, id, inStock, name, prices } =
       this.props.product;
-    const { isLoading } = this.props;
     const { currentCurrency } = this.props;
     const backgroundImage = gallery[0];
     const { detailedView, simplifiedSelection } = this.state;

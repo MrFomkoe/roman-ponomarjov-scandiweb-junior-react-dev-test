@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { caretLeft, caretRight } from "../helper-fuctions/icons";
+import React, { Component } from 'react';
+import { caretLeft, caretRight } from '../helper-fuctions/icons';
 
 export class CartItem extends Component {
   constructor(props) {
@@ -18,20 +18,22 @@ export class CartItem extends Component {
   }
 
   changeImage(action) {
-    let { currentImageIndex } = this.state;
+    const { currentImageIndex } = this.state;
     const { gallery } = this.props.item;
 
-    if (action === 1) {
-      currentImageIndex += 1;
-      if (currentImageIndex > gallery.length-1) currentImageIndex = 0;
-    } else if (action === -1) {
-      currentImageIndex -= 1;
-      if (currentImageIndex < 0) currentImageIndex = gallery.length-1;
+    if (action === 1 && currentImageIndex === gallery.length - 1) {
+      this.setState((prevState) => ({
+        currentImageIndex: 0,
+      }));
+    } else if (action === -1 && currentImageIndex === 0) {
+      this.setState((prevState) => ({
+        currentImageIndex: gallery.length - 1,
+      }));
+    } else {
+      this.setState((prevState) => ({
+        currentImageIndex: prevState.currentImageIndex + action,
+      }));      
     }
-
-    this.setState({
-      currentImageIndex: currentImageIndex,
-    })
   }
 
   renderCartItemAttributes(attributes, cartType) {
@@ -44,13 +46,13 @@ export class CartItem extends Component {
           {allValues.map((singleValue) => {
             const selectedValue = value === singleValue ? true : false;
 
-            if (type === "swatch") {
+            if (type === 'swatch') {
               return (
                 <div
                   key={singleValue}
                   style={{ background: singleValue }}
                   className={`${cartType}-item__color ${
-                    selectedValue && "selected"
+                    selectedValue && 'selected'
                   }`}
                 ></div>
               );
@@ -59,7 +61,7 @@ export class CartItem extends Component {
                 <div
                   key={singleValue}
                   className={`${cartType}-item__text ${
-                    selectedValue && "selected"
+                    selectedValue && 'selected'
                   }`}
                 >
                   {singleValue}
@@ -83,13 +85,13 @@ export class CartItem extends Component {
 
     return (
       <div className={`${cartType}-item-container`}>
-        {cartType === "cart" && <hr />}
+        {cartType === 'cart' && <hr />}
         <div className={`${cartType}-item`}>
           <div className={`${cartType}-item__description`}>
             <div className={`${cartType}-item__details`}>
               <div>
                 <h4>
-                  <span className={`${cartType === "cart" && "heading-bold"}`}>
+                  <span className={`${cartType === 'cart' && 'heading-bold'}`}>
                     {item.brand}
                   </span>
                   <span>{item.name}</span>
@@ -124,11 +126,15 @@ export class CartItem extends Component {
           </div>
 
           <div className={`${cartType}-item__photo`}>
-            <img src={gallery[currentImageIndex]} />
-            {(gallery.length > 1 && cartType === 'cart') && (
+            <img src={gallery[currentImageIndex]} alt="" />
+            {gallery.length > 1 && cartType === 'cart' && (
               <div className="cart-item__photo-btns">
-                <button onClick={() => this.changeImage(-1)}>{caretLeft()}</button>
-                <button onClick={() => this.changeImage(1)}>{caretRight()}</button>
+                <button onClick={() => this.changeImage(-1)}>
+                  {caretLeft()}
+                </button>
+                <button onClick={() => this.changeImage(1)}>
+                  {caretRight()}
+                </button>
               </div>
             )}
           </div>

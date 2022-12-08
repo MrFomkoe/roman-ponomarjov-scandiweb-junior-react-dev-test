@@ -76,7 +76,6 @@ const mapDispatchToProps = (dispatch) => ({
   switchCategory: (categoryName) => dispatch(switchCategory(categoryName)),
 });
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Products)
 
 export default withParams(
   connect(mapStateToProps, mapDispatchToProps)(Products)
