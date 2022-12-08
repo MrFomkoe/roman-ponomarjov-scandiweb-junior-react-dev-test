@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SingleProduct from "../SingleProduct/SingleProduct";
 import { switchCategory } from "../slices/categoriesSlice";
 import { loadCategoryProducts } from "../slices/productsSlice";

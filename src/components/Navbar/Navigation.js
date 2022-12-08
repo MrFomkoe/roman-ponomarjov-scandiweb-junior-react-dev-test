@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { loadCategories, switchCategory } from "../slices/categoriesSlice";
 import "./navbar.css";
 
+
 class Navigation extends Component {
   constructor(props) {
     super(props);

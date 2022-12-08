@@ -16,11 +16,7 @@
   width: 30%;
 }
 
-.shop-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 
 /* Navigation links */
 
@@ -59,6 +55,13 @@
 .nav-link.nav-link-active {
   color: #5ece7b;
   border-bottom: #5ece7b 2px solid;
+}
+
+.shop-icon {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Cart overlay and currency changer section */
