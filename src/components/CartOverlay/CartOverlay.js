@@ -15,11 +15,13 @@ class CartOverlay extends PureComponent {
     super(props);
 
     this.wrapperRef = React.createRef();
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   componentDidMount() {
     const { calculateTotalSum, currentCurrency } = this.props;
     calculateTotalSum(currentCurrency);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   // Checking and displaying current sum of order depending on the current currency
@@ -33,6 +35,18 @@ class CartOverlay extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleOutsideClick);
+  }
+
+  handleOutsideClick(event) {
+    // this.wrapperRef && !this.wrapperRef.current.contains(event.target)
+    if (this.wrapperRef.current.contains(event.target)) {
+      this.props.showCartOverlay()
+    }
+    
+  }
+
   render() {
     const { cartItems, totalSum, numOfProducts } = this.props.cart;
 
@@ -41,9 +55,9 @@ class CartOverlay extends PureComponent {
 
     return (
       <div>
-        <div className="cart-overlay-background"></div>
+        <div className="cart-overlay-background" ref={this.wrapperRef}></div>
         <div className="cart-overlay-container">
-          <div className="cart-overlay">
+          <div className="cart-overlay" >
             <h2 className="cart-overlay-heading">
               <span className="cart-overlay-heading__bold"> My Bag</span>
               <span className="cart-overlay-heading__item-amount">

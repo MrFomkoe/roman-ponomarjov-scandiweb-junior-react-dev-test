@@ -74,6 +74,7 @@
 /* Cart overlay and currency changer section */
 
 .navbar-control-section {
+  flex-basis: 100px;
   display: flex;
   align-items: center;
   justify-content: flex-end;

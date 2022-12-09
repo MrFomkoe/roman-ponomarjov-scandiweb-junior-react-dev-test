@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -32,7 +32,12 @@ export const cartSlice = createSlice({
     },
 
     showCartOverlay: (state, action) => {
-      state.cartOverlayVisible = !state.cartOverlayVisible;
+      console.log(action.payload);
+      if (action.payload === false) {
+        state.cartOverlayVisible = action.payload;
+      } else {
+        state.cartOverlayVisible = !state.cartOverlayVisible;
+      }
     },
 
     increaseAmount: (state, action) => {
@@ -58,18 +63,22 @@ export const cartSlice = createSlice({
     },
 
     calculateTotalSum: (state, action) => {
-      let newTotalSum = Number();
-
-      state.cartItems.map((item) => {
+      const itemSumArr = state.cartItems.map((item) => {
+        console.log(current(item));
         const itemPrice = item.prices.find(
           (price) => price.currency.label === action.payload.label
         ).amount;
         const sumForItem = item.quantity * itemPrice;
-        newTotalSum += sumForItem;
-        return newTotalSum
+        return parseFloat(sumForItem.toFixed(2));
       });
-      state.totalSum = parseFloat(newTotalSum.toFixed(2));
+      const totalSum =
+        itemSumArr.length > 0
+          ? itemSumArr.reduce((acc, value) => {
+              return acc + value;
+            })
+          : 0;
 
+      state.totalSum = parseFloat(totalSum.toFixed(2));
     },
   },
 });
