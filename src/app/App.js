@@ -11,13 +11,13 @@ import "./app.css";
 
 class App extends PureComponent {
   render() {
-    const {categoriesLoading, showCartOverlay} = this.props;
+    const {categoriesLoading, cartOverlayVisible} = this.props;
 
     return (
       <BrowserRouter>
         <div className="app">
           <Navbar />
-          {showCartOverlay && <CartOverlay />}
+          {cartOverlayVisible && <CartOverlay />}
           {categoriesLoading ? (
             ""
           ) : (
@@ -43,7 +43,7 @@ class App extends PureComponent {
 const mapStateToProps = (state) => ({
   categoriesLoading: state.categories.isLoading,
   currenciesLoading: state.currencies.isLoading,
-  showCartOverlay: state.cart.showCartOverlay,
+  cartOverlayVisible: state.cart.cartOverlayVisible,
 });
 
 export default connect(mapStateToProps)(App);
