@@ -78,7 +78,7 @@ export const cartSlice = createSlice({
             })
           : 0;
 
-      state.totalSum = parseFloat(totalSum.toFixed(2));
+      state.totalSum = totalSum.toFixed(2);
     },
   },
 });
