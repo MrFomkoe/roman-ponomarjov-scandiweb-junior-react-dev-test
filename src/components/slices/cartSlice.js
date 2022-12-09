@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -32,7 +32,6 @@ export const cartSlice = createSlice({
     },
 
     showCartOverlay: (state, action) => {
-      console.log(action.payload);
       if (action.payload === false) {
         state.cartOverlayVisible = action.payload;
       } else {
@@ -64,7 +63,6 @@ export const cartSlice = createSlice({
 
     calculateTotalSum: (state, action) => {
       const itemSumArr = state.cartItems.map((item) => {
-        console.log(current(item));
         const itemPrice = item.prices.find(
           (price) => price.currency.label === action.payload.label
         ).amount;

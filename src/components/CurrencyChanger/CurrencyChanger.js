@@ -1,91 +1,25 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { chevronDown, chevronUp } from '../../app/helper-fuctions/icons';
-import { loadCurrencies, switchCurrency } from '../slices/currencySlice';
 import './currencyChanger.css';
 
-class CurrencyChanger extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapseCurrencyChanger: false,
-    };
-
-    this.wrapperRef = React.createRef();
-    this.handleClick = this.handleClick.bind(this);
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
-  }
-
-  async componentDidMount() {
-    document.addEventListener('mousedown', this.handleOutsideClick);
-    const { loadCurrencies, switchCurrency } = this.props;
-    const { currencies } = this.props.currencies;
-
-    // Upon the first run of app, currencies will be loaded and switched to "default" - first in array
-    if (!currencies) {
-      await loadCurrencies();
-      const { currentCurrency, defaultCurrency } = this.props.currencies;
-      if (!currentCurrency) {
-        await switchCurrency(defaultCurrency);
-      }
-    }
-  }
-
-  // Adding outside click event to close the switcher
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleOutsideClick);
-  }
-
-  // Currency symbol button action handler
-  handleClick() {
-    this.setState({
-      collapseCurrencyChanger: this.state.collapseCurrencyChanger
-        ? false
-        : true,
-    });
-  }
-
-  // Currency change handler
-  handleCurrencyChange(currency) {
-    const { switchCurrency } = this.props;
-    switchCurrency(currency);
-    this.setState({
-      collapseCurrencyChanger: false,
-    });
-  }
-
-  // Outside click handler
-  handleOutsideClick(event) {
-    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-      if (this.state.collapseCurrencyChanger) {
-        this.setState({
-          collapseCurrencyChanger: false,
-        });
-      }
-    }
-  }
+export class CurrencyChanger extends PureComponent {
 
   render() {
-    const { currencies, currentCurrency } = this.props.currencies;
-    const { collapseCurrencyChanger } = this.state;
-
-    return !currentCurrency ? (
-      ''
-    ) : (
-      <div className="currency-container" ref={this.wrapperRef}>
-        <button className="currency-preview" onClick={() => this.handleClick()}>
+    const { currencies, currentCurrency, currencyChangerVisible } = this.props.currencies;
+    return (
+      <div className="currency-container" ref={this.props.wrapperRef}>
+        <button className="currency-preview" onClick={() => this.props.handleClick()}>
           <div className="currency-preview__inner">
             <span className="currency-symbol"> {currentCurrency.symbol}</span>
             <span className="currency-chevron">
-              {collapseCurrencyChanger ? chevronUp() : chevronDown()}
+              {currencyChangerVisible ? chevronUp() : chevronDown()}
             </span>
           </div>
         </button>
 
         <div
           className={`currency-selector ${
-            !collapseCurrencyChanger && 'hidden'
+            !currencyChangerVisible && 'hidden'
           }`}
         >
           {currencies.map((currency) => {
@@ -93,7 +27,7 @@ class CurrencyChanger extends PureComponent {
               <button
                 className="currency-selector__option"
                 key={currency.label}
-                onClick={() => this.handleCurrencyChange(currency)}
+                onClick={() => this.props.handleCurrencyChange(currency)}
               >
                 <span className="currency-selector__symbol">
                   {' '}
@@ -111,14 +45,3 @@ class CurrencyChanger extends PureComponent {
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  currencies: state.currencies,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadCurrencies: () => dispatch(loadCurrencies()),
-  switchCurrency: (currency) => dispatch(switchCurrency(currency)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CurrencyChanger);

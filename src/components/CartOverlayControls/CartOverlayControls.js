@@ -1,31 +1,14 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { emptyCartIcon } from "../../app/helper-fuctions/icons";
-import { showCartOverlay } from "../slices/cartSlice";
-import "./cartOverlayControls.css";
+import React, { PureComponent } from 'react';
+import { emptyCartIcon } from '../../app/helper-fuctions/icons';
+import './cartOverlayControls.css';
 
-
-class CartOverlayControls extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  // Handler for cart button to open or close overlay cart
-  handleClick() {
-    this.props.showCartOverlay();
-  }
-
+export class CartOverlayControls extends PureComponent {
   render() {
-    const { numOfProducts } = this.props.cart; 
+    const { numOfProducts, handleClick } = this.props;
 
-    return (
+    return ( 
       <div className="cart-overlay-controls">
-        <button
-          className="cart-overlay-button"
-          onClick={(e) => this.handleClick()}
-        >
+        <button className="cart-overlay-button" onClick={(e) => handleClick()}>
           {emptyCartIcon()}
 
           {/* Icon with amount of items */}
@@ -37,13 +20,3 @@ class CartOverlayControls extends PureComponent {
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  cart: state.cart,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  showCartOverlay: () => dispatch(showCartOverlay()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartOverlayControls);

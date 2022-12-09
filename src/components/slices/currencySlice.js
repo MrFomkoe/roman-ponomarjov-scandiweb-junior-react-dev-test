@@ -28,10 +28,18 @@ export const currenciesSlice = createSlice({
     currencies: null,
     currentCurrency: null,
     defaultCurrency: null,
+    currencyChangerVisible: false,
   },
   reducers: {
     switchCurrency: (state, action) => {
       state.currentCurrency = action.payload;
+    },
+    showCurrencyChanger: (state, action) => {
+      if (action.payload === false) {
+        state.currencyChangerVisible = action.payload;
+      } else {
+        state.currencyChangerVisible = !state.currencyChangerVisible;
+      }
     },
   },
   extraReducers: {
@@ -50,6 +58,6 @@ export const currenciesSlice = createSlice({
   },
 });
 
-export const { switchCurrency } = currenciesSlice.actions;
+export const { switchCurrency, showCurrencyChanger } = currenciesSlice.actions;
 
 export default currenciesSlice.reducer;
