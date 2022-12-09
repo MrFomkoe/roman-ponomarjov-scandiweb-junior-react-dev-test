@@ -6,7 +6,7 @@ export const cartSlice = createSlice({
     cartItems: [],
     totalSum: null,
     numOfProducts: null,
-    showCartOverlay: false,
+    cartOverlayVisible: false,
   },
   reducers: {
     addItemToCart: (state, action) => {
@@ -32,7 +32,7 @@ export const cartSlice = createSlice({
     },
 
     showCartOverlay: (state, action) => {
-      state.showCartOverlay = !state.showCartOverlay;
+      state.cartOverlayVisible = !state.cartOverlayVisible;
     },
 
     increaseAmount: (state, action) => {
