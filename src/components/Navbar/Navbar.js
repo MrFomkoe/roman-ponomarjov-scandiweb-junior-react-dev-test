@@ -32,7 +32,9 @@ export class Navbar extends PureComponent {
     return (
       <div className="navbar-container" ref={navWrapperRef}>
         <div className="navbar">
-          {!isLoading && (
+          {isLoading ? (
+            'Loading...'
+          ) : (
             <Navigation
               categories={categories}
               defaultCategory={defaultCategory}

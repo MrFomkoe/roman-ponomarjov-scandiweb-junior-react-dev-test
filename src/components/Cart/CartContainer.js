@@ -80,7 +80,6 @@ class CartContainer extends PureComponent {
 const mapStateToProps = (state) => ({
   cart: state.cart,
   currentCurrency: state.currencies.currentCurrency,
-  isLoading: state.currencies.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

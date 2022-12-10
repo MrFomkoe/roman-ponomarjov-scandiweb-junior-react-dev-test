@@ -5,7 +5,7 @@ import CartContainer from "../components/Cart/CartContainer";
 import CartOverlayContainer from "../components/CartOverlay/CartOverlayContainer";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
 import ProductDetailedViewContainer from "../components/ProductDetails/ProductDetailedViewContainer";
-import Products from "../components/Products/Products";
+import ProductsContainer from "../components/Products/ProductsContainer";
 
 import "./app.css";  
 
@@ -21,8 +21,8 @@ class App extends PureComponent {
           {!categoriesLoading && (
             <div className="app-wrapper">
               <Routes>
-                <Route exact path="/" element={<Products />} />
-                <Route exact path="/:category" element={<Products />} />
+                <Route exact path="/" element={<ProductsContainer />} />
+                <Route exact path="/:category" element={<ProductsContainer />} />
                 <Route
                   exact
                   path="/products/:id"
@@ -40,7 +40,6 @@ class App extends PureComponent {
 
 const mapStateToProps = (state) => ({
   categoriesLoading: state.categories.isLoading,
-  currenciesLoading: state.currencies.isLoading,
   cartOverlayVisible: state.cart.cartOverlayVisible,
 });
 
