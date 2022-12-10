@@ -1,39 +1,11 @@
 import React, { PureComponent } from 'react';
-import { caretLeft, caretRight } from '../helper-fuctions/icons';
+import { caretLeft, caretRight } from '../../app/helper-fuctions/icons';
 
 export class CartItem extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {};
-
     this.renderCartItemAttributes = this.renderCartItemAttributes.bind(this);
-    this.changeImage = this.changeImage.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({
-      currentImageIndex: 0,
-    });
-  }
-
-  changeImage(action) {
-    const { currentImageIndex } = this.state;
-    const { gallery } = this.props.item;
-
-    if (action === 1 && currentImageIndex === gallery.length - 1) {
-      this.setState((prevState) => ({
-        currentImageIndex: 0,
-      }));
-    } else if (action === -1 && currentImageIndex === 0) {
-      this.setState((prevState) => ({
-        currentImageIndex: gallery.length - 1,
-      }));
-    } else {
-      this.setState((prevState) => ({
-        currentImageIndex: prevState.currentImageIndex + action,
-      }));      
-    }
   }
 
   renderCartItemAttributes(attributes, cartType) {
@@ -75,13 +47,16 @@ export class CartItem extends PureComponent {
   }
 
   render() {
-    const { item, increaseAmount, decreaseAmount, currentCurrency, cartType, } =
-      this.props;
-    const priceToShow = item.prices.find(
-      (price) => price.currency.label === currentCurrency.label
-    );
-    const { gallery } = item;
-    const { currentImageIndex } = this.state;
+    const {
+      item,
+      increaseAmount,
+      decreaseAmount,
+      currentCurrency,
+      cartType,
+      priceToShow,
+      currentImageIndex,
+      gallery,
+    } = this.props;
 
     return (
       <div className={`${cartType}-item-container`}>
@@ -129,10 +104,10 @@ export class CartItem extends PureComponent {
             <img src={gallery[currentImageIndex]} alt="" />
             {gallery.length > 1 && cartType === 'cart' && (
               <div className="cart-item__photo-btns">
-                <button onClick={() => this.changeImage(-1)}>
+                <button onClick={() => this.props.changeImage(-1)}>
                   {caretLeft()}
                 </button>
-                <button onClick={() => this.changeImage(1)}>
+                <button onClick={() => this.props.changeImage(1)}>
                   {caretRight()}
                 </button>
               </div>

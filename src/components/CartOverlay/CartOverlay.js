@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 // Component imports
-import { CartItem } from '../../app/features/CartItem';
+import { CartItemContainer } from '../CartItem/CartItemContainer';
 // CSS imports
 import './cartOverlay.css';
 
@@ -39,7 +39,7 @@ export class CartOverlay extends PureComponent {
             <div className="cart-overlay-items">
               {cartItems.map((item, index) => {
                 return (
-                  <CartItem
+                  <CartItemContainer
                     key={index}
                     cartType={cartType}
                     increaseAmount={increaseAmount}

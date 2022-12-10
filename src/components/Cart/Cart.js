@@ -1,7 +1,7 @@
 // Library imports
 import React, { PureComponent } from 'react';
 // Component imports
-import { CartItem } from '../../app/features/CartItem';
+import { CartItemContainer } from '../CartItem/CartItemContainer';
 // CSS imports
 import './cart.css';
 
@@ -24,7 +24,7 @@ export class Cart extends PureComponent {
 
         {cartItems.map((item, index) => {
           return (
-            <CartItem
+            <CartItemContainer
               changeImage={changeImage}
               key={index}
               cartType={cartType}
