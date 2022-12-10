@@ -1,63 +1,30 @@
+// Library imports
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+// Component imports
 import { CartItem } from '../../app/features/CartItem';
-import {
-  showCartOverlay,
-  increaseAmount,
-  decreaseAmount,
-  calculateTotalSum,
-} from '../slices/cartSlice';
+// CSS imports
 import './cartOverlay.css';
 
-class CartOverlay extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.wrapperRef = React.createRef();
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
-  }
-
-  componentDidMount() {
-    const { calculateTotalSum, currentCurrency } = this.props;
-    calculateTotalSum(currentCurrency);
-    document.addEventListener('click', this.handleOutsideClick);
-  }
-
-  // Checking and displaying current sum of order depending on the current currency
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.cart.numOfProducts !== this.props.cart.numOfProducts ||
-      prevProps.currentCurrency !== this.props.currentCurrency
-    ) {
-      const { calculateTotalSum, currentCurrency } = this.props;
-      calculateTotalSum(currentCurrency);
-    }
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('click', this.handleOutsideClick);
-  }
-
-  handleOutsideClick(event) {
-    // this.wrapperRef && !this.wrapperRef.current.contains(event.target)
-    if (this.wrapperRef.current.contains(event.target)) {
-      this.props.showCartOverlay()
-    }
-    
-  }
-
+export class CartOverlay extends PureComponent {
   render() {
-    const { cartItems, totalSum, numOfProducts } = this.props.cart;
-
-    const { currentCurrency, increaseAmount, decreaseAmount } = this.props;
-    const cartType = 'cart-overlay';
+    const {
+      currentCurrency,
+      increaseAmount,
+      decreaseAmount,
+      numOfProducts,
+      totalSum,
+      cartItems,
+      cartType,
+      wrapperRef,
+      showCartOverlay,
+    } = this.props;
 
     return (
       <div>
-        <div className="cart-overlay-background" ref={this.wrapperRef}></div>
+        <div className="cart-overlay-background" ref={wrapperRef}></div>
         <div className="cart-overlay-container">
-          <div className="cart-overlay" >
+          <div className="cart-overlay">
             <h2 className="cart-overlay-heading">
               <span className="cart-overlay-heading__bold"> My Bag</span>
               <span className="cart-overlay-heading__item-amount">
@@ -95,7 +62,7 @@ class CartOverlay extends PureComponent {
               <Link
                 to="/cart"
                 className="cart-overlay-links__cart"
-                onClick={() => this.props.showCartOverlay()}
+                onClick={() => showCartOverlay()}
               >
                 VIEW BAG
               </Link>
@@ -114,18 +81,3 @@ class CartOverlay extends PureComponent {
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  cart: state.cart,
-  currentCurrency: state.currencies.currentCurrency,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  showCartOverlay: () => dispatch(showCartOverlay()),
-  increaseAmount: (id) => dispatch(increaseAmount(id)),
-  decreaseAmount: (id) => dispatch(decreaseAmount(id)),
-  calculateTotalSum: (currentCurrency) =>
-    dispatch(calculateTotalSum(currentCurrency)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartOverlay);

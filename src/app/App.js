@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Cart from "../components/Cart/Cart";
-import CartOverlay from "../components/CartOverlay/CartOverlay";
+import CartOverlayContainer from "../components/CartOverlay/CartOverlayContainer";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
 import ProductDetails from "../components/ProductDetails/ProductDetailedView";
 import Products from "../components/Products/Products";
@@ -17,10 +17,8 @@ class App extends PureComponent {
       <BrowserRouter>
         <div className="app">
           <NavbarContainer />
-          {cartOverlayVisible && <CartOverlay />}
-          {categoriesLoading ? (
-            ""
-          ) : (
+          {cartOverlayVisible && <CartOverlayContainer />}
+          {!categoriesLoading && (
             <div className="app-wrapper">
               <Routes>
                 <Route exact path="/" element={<Products />} />
