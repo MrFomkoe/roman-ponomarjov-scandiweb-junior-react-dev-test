@@ -9,7 +9,7 @@ export const loadCategories = createAsyncThunk(
     const query = gql`
       {
         categories {
-          name 
+          name
         }
       }
     `;

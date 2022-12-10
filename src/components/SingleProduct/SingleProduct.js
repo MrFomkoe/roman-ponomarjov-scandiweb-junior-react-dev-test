@@ -3,8 +3,10 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 // Icon import
 import { cartIconBig } from '../../app/helper-fuctions/icons';
-
+// Component import
 import { SingleProductForm } from '../../app/features/SingleProductForm';
+// CSS import
+import './singleProduct.css';
 
 export class SingleProduct extends PureComponent {
   render() {

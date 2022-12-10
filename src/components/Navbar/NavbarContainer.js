@@ -1,7 +1,6 @@
 // Library imports
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-
 // CSS / function imports
 import { loadCategories, switchCategory } from '../slices/categoriesSlice';
 import { showCartOverlay } from '../slices/cartSlice';
@@ -10,8 +9,7 @@ import {
   showCurrencyChanger,
   switchCurrency,
 } from '../slices/currencySlice';
-
-// Component imports 
+// Component imports
 import { Navbar } from './Navbar';
 
 export class NavbarContainer extends PureComponent {
@@ -122,12 +120,10 @@ export class NavbarContainer extends PureComponent {
         categories={categories}
         switchCategory={switchCategory}
         navWrapperRef={this.navWrapperRef}
-
         currencies={currencies}
         handleCurrencyChange={this.handleCurrencyChange}
         collapseCurrencyChanger={this.collapseCurrencyChanger}
         currencyWrapperRef={this.currencyWrapperRef}
-
         controlsWrapperRef={this.controlsWrapperRef}
         numOfProducts={numOfProducts}
         collapseCartOverlay={this.collapseCartOverlay}

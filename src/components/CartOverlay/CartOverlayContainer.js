@@ -1,11 +1,14 @@
+// Library import
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+// Function import
 import {
   showCartOverlay,
   increaseAmount,
   decreaseAmount,
   calculateTotalSum,
 } from '../slices/cartSlice';
+// Component import
 import { CartOverlay } from './CartOverlay';
 
 class CartOverlayContainer extends PureComponent {
@@ -46,7 +49,8 @@ class CartOverlayContainer extends PureComponent {
 
   render() {
     const { cartItems, totalSum, numOfProducts } = this.props.cart;
-    const { currentCurrency, increaseAmount, decreaseAmount, showCartOverlay } = this.props;
+    const { currentCurrency, increaseAmount, decreaseAmount, showCartOverlay } =
+      this.props;
     const cartType = 'cart-overlay';
 
     return (

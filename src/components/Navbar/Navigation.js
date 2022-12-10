@@ -1,10 +1,11 @@
+// Library import
 import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export class Navigation extends PureComponent {
   render() {
     const { categories, defaultCategory, handleClick } = this.props;
-    
+
     return (
       <nav className="navigation">
         <ul className="navigation-list">

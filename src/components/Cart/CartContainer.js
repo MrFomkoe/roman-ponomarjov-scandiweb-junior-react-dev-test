@@ -1,10 +1,13 @@
+// Library import
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+// Function import
 import {
   calculateTotalSum,
   decreaseAmount,
   increaseAmount,
 } from '../slices/cartSlice';
+// Component import
 import { Cart } from './Cart';
 
 class CartContainer extends PureComponent {

@@ -1,7 +1,9 @@
+// Library import
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+// Function import
 import { addItemToCart } from '../slices/cartSlice';
-import './singleProduct.css';
+// Component import
 import { SingleProduct } from './SingleProduct';
 
 class SingleProductContainer extends PureComponent {

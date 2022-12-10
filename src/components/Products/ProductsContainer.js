@@ -1,8 +1,11 @@
+// Library import
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+// Function import
 import { switchCategory } from '../slices/categoriesSlice';
 import { loadCategoryProducts } from '../slices/productsSlice';
+// Container import
 import { Products } from './Products';
 
 function withParams(Component) {

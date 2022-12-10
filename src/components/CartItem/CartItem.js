@@ -1,4 +1,6 @@
+// Library import
 import React, { PureComponent } from 'react';
+// Icon import
 import { caretLeft, caretRight } from '../../app/helper-fuctions/icons';
 
 export class CartItem extends PureComponent {

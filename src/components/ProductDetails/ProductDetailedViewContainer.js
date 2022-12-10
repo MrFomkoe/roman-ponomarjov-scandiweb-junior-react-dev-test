@@ -6,7 +6,6 @@ import parse from 'html-react-parser';
 // Function imports
 import { addItemToCart } from '../slices/cartSlice';
 import { loadSingleProduct } from '../slices/productsSlice';
-
 // Component imports
 import { ProductDetailedView } from './ProductDetailedView';
 
@@ -123,14 +122,14 @@ class ProductDetailedViewContainer extends PureComponent {
     );
 
     return (
-      <ProductDetailedView 
-      productData={this.props.productData}
-      activeImage={activeImage}
-      priceToShow={priceToShow}
-      parse={parse}
-      handleAttributesChange={this.handleAttributesChange}
-      handleSubmit={this.handleSubmit}
-      changeImage={this.changeImage}
+      <ProductDetailedView
+        productData={this.props.productData}
+        activeImage={activeImage}
+        priceToShow={priceToShow}
+        parse={parse}
+        handleAttributesChange={this.handleAttributesChange}
+        handleSubmit={this.handleSubmit}
+        changeImage={this.changeImage}
       />
     );
   }

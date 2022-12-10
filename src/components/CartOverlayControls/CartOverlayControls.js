@@ -1,12 +1,15 @@
+// Library import
 import React, { PureComponent } from 'react';
+// Icon import
 import { emptyCartIcon } from '../../app/helper-fuctions/icons';
+// CSS import
 import './cartOverlayControls.css';
 
 export class CartOverlayControls extends PureComponent {
   render() {
     const { numOfProducts, handleClick } = this.props;
 
-    return ( 
+    return (
       <div className="cart-overlay-controls">
         <button className="cart-overlay-button" onClick={(e) => handleClick()}>
           {emptyCartIcon()}

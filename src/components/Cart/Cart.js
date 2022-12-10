@@ -30,7 +30,7 @@ export class Cart extends PureComponent {
               cartType={cartType}
               increaseAmount={increaseAmount}
               decreaseAmount={decreaseAmount}
-              currentCurrency={currentCurrency}
+              currentCurrency={currentCurrency} 
               item={item}
             />
           );

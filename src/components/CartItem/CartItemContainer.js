@@ -1,4 +1,6 @@
+// Library import
 import React, { PureComponent } from 'react';
+// Component import
 import { CartItem } from './CartItem';
 
 export class CartItemContainer extends PureComponent {

@@ -1,11 +1,9 @@
 // Library imports
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-
 // CSS / function imports
 import './navbar.css';
 import { logoIcon } from '../../app/helper-fuctions/icons';
-
 // Component imports
 import { CartOverlayControls } from '../CartOverlayControls/CartOverlayControls';
 import { CurrencyChanger } from '../CurrencyChanger/CurrencyChanger';

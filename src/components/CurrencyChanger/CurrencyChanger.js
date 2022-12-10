@@ -1,14 +1,21 @@
+// Library import
 import React, { PureComponent } from 'react';
+// Icon import
 import { chevronDown, chevronUp } from '../../app/helper-fuctions/icons';
+// CSS import
 import './currencyChanger.css';
 
 export class CurrencyChanger extends PureComponent {
   render() {
-    const { currencies, currentCurrency, currencyChangerVisible } = this.props.currencies;
-    
+    const { currencies, currentCurrency, currencyChangerVisible } =
+      this.props.currencies;
+
     return (
       <div className="currency-container" ref={this.props.wrapperRef}>
-        <button className="currency-preview" onClick={() => this.props.handleClick()}>
+        <button
+          className="currency-preview"
+          onClick={() => this.props.handleClick()}
+        >
           <div className="currency-preview__inner">
             <span className="currency-symbol"> {currentCurrency.symbol}</span>
             <span className="currency-chevron">
@@ -18,9 +25,7 @@ export class CurrencyChanger extends PureComponent {
         </button>
 
         <div
-          className={`currency-selector ${
-            !currencyChangerVisible && 'hidden'
-          }`}
+          className={`currency-selector ${!currencyChangerVisible && 'hidden'}`}
         >
           {currencies.map((currency) => {
             return (

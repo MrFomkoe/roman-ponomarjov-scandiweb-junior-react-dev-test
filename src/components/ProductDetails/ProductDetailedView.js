@@ -7,8 +7,16 @@ import './ProductDetailedView.css';
 
 export class ProductDetailedView extends PureComponent {
   render() {
-    const { attributes, brand, gallery, inStock, name, description } = this.props.productData;
-    const {priceToShow, activeImage, parse, handleSubmit, handleAttributesChange, changeImage} = this.props;
+    const { attributes, brand, gallery, inStock, name, description } =
+      this.props.productData;
+    const {
+      priceToShow,
+      activeImage,
+      parse,
+      handleSubmit,
+      handleAttributesChange,
+      changeImage,
+    } = this.props;
     return (
       <div>
         <div className="detailed-view-container">
