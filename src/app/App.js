@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react"; 
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Cart from "../components/Cart/Cart";
+import CartContainer from "../components/Cart/CartContainer";
 import CartOverlayContainer from "../components/CartOverlay/CartOverlayContainer";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
 import ProductDetails from "../components/ProductDetails/ProductDetailedView";
@@ -28,7 +28,7 @@ class App extends PureComponent {
                   path="/products/:id"
                   element={<ProductDetails />}
                 />
-                <Route exact path="/cart" element={<Cart />} />
+                <Route exact path="/cart" element={<CartContainer />} />
               </Routes>
             </div>
           )}

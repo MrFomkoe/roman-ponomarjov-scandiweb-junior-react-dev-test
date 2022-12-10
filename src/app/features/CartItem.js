@@ -75,7 +75,7 @@ export class CartItem extends PureComponent {
   }
 
   render() {
-    const { item, increaseAmount, decreaseAmount, currentCurrency, cartType } =
+    const { item, increaseAmount, decreaseAmount, currentCurrency, cartType, } =
       this.props;
     const priceToShow = item.prices.find(
       (price) => price.currency.label === currentCurrency.label
