@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import SingleProduct from '../SingleProduct/SingleProduct';
+import SingleProductContainer from '../SingleProduct/SingleProductContainer';
 import './products.css';
 
 export class Products extends PureComponent {
@@ -12,7 +12,7 @@ export class Products extends PureComponent {
         {
           products.map((product) => {
             return (
-              <SingleProduct
+              <SingleProductContainer
                 key={product.id}
                 product={product}
               />
