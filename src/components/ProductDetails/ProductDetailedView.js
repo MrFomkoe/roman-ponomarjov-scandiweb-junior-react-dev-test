@@ -1,5 +1,9 @@
+// Library imports
 import React, { PureComponent } from 'react';
+// Component imports
 import { SingleProductForm } from '../../app/features/SingleProductForm';
+// CSS imports
+import './ProductDetailedView.css';
 
 export class ProductDetailedView extends PureComponent {
   render() {

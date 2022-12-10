@@ -3,10 +3,10 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
-// CSS / function imports
+// Function imports
 import { addItemToCart } from '../slices/cartSlice';
 import { loadSingleProduct } from '../slices/productsSlice';
-import './ProductDetailedView.css';
+
 // Component imports
 import { ProductDetailedView } from './ProductDetailedView';
 
