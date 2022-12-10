@@ -115,11 +115,11 @@ export class NavbarContainer extends PureComponent {
   render() {
     const { switchCategory } = this.props;
     const { numOfProducts } = this.props.cart;
-    const { currencies } = this.props;
+    const { currencies, categories } = this.props;
 
     return (
       <Navbar
-        categories={this.props.categories}
+        categories={categories}
         switchCategory={switchCategory}
         navWrapperRef={this.navWrapperRef}
 

@@ -3,9 +3,9 @@ import { chevronDown, chevronUp } from '../../app/helper-fuctions/icons';
 import './currencyChanger.css';
 
 export class CurrencyChanger extends PureComponent {
-
   render() {
     const { currencies, currentCurrency, currencyChangerVisible } = this.props.currencies;
+    
     return (
       <div className="currency-container" ref={this.props.wrapperRef}>
         <button className="currency-preview" onClick={() => this.props.handleClick()}>
