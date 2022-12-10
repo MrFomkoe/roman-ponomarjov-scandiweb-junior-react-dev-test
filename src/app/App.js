@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CartContainer from "../components/Cart/CartContainer";
 import CartOverlayContainer from "../components/CartOverlay/CartOverlayContainer";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
-import ProductDetails from "../components/ProductDetails/ProductDetailedView";
+import ProductDetailedViewContainer from "../components/ProductDetails/ProductDetailedViewContainer";
 import Products from "../components/Products/Products";
 
 import "./app.css";  
@@ -26,7 +26,7 @@ class App extends PureComponent {
                 <Route
                   exact
                   path="/products/:id"
-                  element={<ProductDetails />}
+                  element={<ProductDetailedViewContainer />}
                 />
                 <Route exact path="/cart" element={<CartContainer />} />
               </Routes>
