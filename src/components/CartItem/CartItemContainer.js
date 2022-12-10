@@ -91,7 +91,6 @@ export class CartItemContainer extends PureComponent {
         priceToShow={priceToShow}
         gallery={gallery}
         currentImageIndex={currentImageIndex}
-        currentCurrency={currentCurrency}
         item={item}
         changeImage={this.changeImage}
       />

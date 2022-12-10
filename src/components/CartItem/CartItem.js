@@ -51,7 +51,6 @@ export class CartItem extends PureComponent {
       item,
       increaseAmount,
       decreaseAmount,
-      currentCurrency,
       cartType,
       priceToShow,
       currentImageIndex,
